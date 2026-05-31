@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)file:///C:/Users/USER/Downloads/bucheon_docent_v2_2.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>부천시 활박물관 — 태용 도슨트</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+
+/* ── 다크모드 강제 (시스템 설정 무관) ── */
+:root {
+  color-scheme: only dark;
+  --bg:      #0c0c10;
+  --bg2:     #12121a;
+  --bg3:     #181824;
+  --card:    #1c1c28;
+  --gold:    #c8a84b;
+  --gold2:   #e8cc80;
+  --gold3:   #f0dfa0;
+  --text:    #ede8dc;
+  --text2:   #9a8f7a;
+  --bubble:  #16202e;
+  --bline:   rgba(100,160,230,0.35);
+  --border:  rgba(200,168,75,0.2);
+}
+html, body {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  -webkit-text-fill-color: var(--text);
+}
+body {
+  font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ────────── 공통 ────────── */
+.scene {
+  width: 100%;
+  min-height: 100svh;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+.section-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.25;
+}
+
+/* 말풍선 공통 */
+.bubble {
+  background: var(--bubble);
+  border: 1.5px solid var(--bline);
+  border-radius: 16px;
+  padding: 15px 17px;
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text);
+  -webkit-text-fill-color: var(--text);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  position: relative;
+}
+.bubble b { color: var(--gold2); -webkit-text-fill-color: var(--gold2); font-weight:600; }
+.bubble em { color: #8ecfff; -webkit-text-fill-color:#8ecfff; font-style:normal; }
+
+/* 말풍선 꼬리 - 아래 왼쪽 */
+.bubble.tail-bl::after {
+  content:''; position:absolute; bottom:-9px; left:22px;
+  border-left:9px solid transparent;
+  border-right:9px solid transparent;
+  border-top:9px solid var(--bline);
+}
+/* 말풍선 꼬리 - 아래 오른쪽 */
+.bubble.tail-br::after {
+  content:''; position:absolute; bottom:-9px; right:22px;
+  border-left:9px solid transparent;
+  border-right:9px solid transparent;
+  border-top:9px solid var(--bline);
+}
+/* 말풍선 꼬리 - 오른쪽 중간 (캐릭터 왼쪽에 버블) */
+.bubble.tail-r::after {
+  content:''; position:absolute; top:22px; right:-9px;
+  border-top:9px solid transparent;
+  border-bottom:9px solid transparent;
+  border-left:9px solid var(--bline);
+}
+/* 진행 도트 */
+.pdots {
+  position:fixed; right:12px; top:50%; transform:translateY(-50%);
+  z-index:999; display:flex; flex-direction:column; gap:7px;
+}
+.pdot {
+  width:5px; height:5px; border-radius:3px;
+  background:rgba(200,168,75,0.25); transition:all .3s;
+}
+.pdot.on { height:18px; background:var(--gold); }
+
+/* ════════════════════════════
+   씬 1 — 인트로 (인사하는 태용)
+   캐릭터: 정면, 오른손 위로 손 흔들기
+   레이아웃: 캐릭터 하단 중앙 + 말풍선 위
+   ════════════════════════════ */
+#s1 {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-end;
+  padding-bottom:0;
+  background: radial-gradient(ellipse 90% 60% at 50% 100%, rgba(180,140,50,0.07) 0%, transparent 70%),
+              linear-gradient(180deg,#08080f 0%,var(--bg) 100%);
+}
+.s1-badge {
+  position:absolute; top:40px; left:50%; transform:translateX(-50%);
+  text-align:center; z-index:10; opacity:0;
+}
+.s1-badge .bl { width:36px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 5px; }
+.s1-badge .bt { font-size:9.5px;letter-spacing:.32em;color:var(--gold);font-weight:300; -webkit-text-fill-color:var(--gold); }
+.s1-badge .bk { font-size:11px;color:rgba(200,168,75,.55);letter-spacing:.12em;margin-top:3px; -webkit-text-fill-color:rgba(200,168,75,.55); }
+
+.s1-bubble-wrap {
+  width:100%; padding:0 22px; z-index:20; opacity:0;
+}
+.s1-char {
+  z-index:10; opacity:0; margin-top:-20px;
+  display:flex; justify-content:center;
+}
+.s1-char img { height:320px; width:auto; filter:drop-shadow(0 6px 20px rgba(0,0,0,.6)); }
+
+.scroll-hint {
+  position:absolute; bottom:22px; left:50%; transform:translateX(-50%);
+  z-index:20; display:flex; flex-direction:column; align-items:center; gap:5px; opacity:0;
+}
+.scroll-hint span { font-size:9px;letter-spacing:.25em;color:var(--text2); -webkit-text-fill-color:var(--text2); }
+.sh-arrow { width:18px;height:18px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);animation:abounce 1.4s infinite; }
+@keyframes abounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(5px)} }
+
+/* ════════════════════════════
+   씬 2 — 챕터 타이틀
+   ════════════════════════════ */
+#s2 {
+  display:flex; flex-direction:column;
+  justify-content:center; padding:70px 28px 60px;
+  background:linear-gradient(180deg,var(--bg2) 0%,var(--bg3) 100%);
+}
+.ch-label { font-size:10px;letter-spacing:.4em;color:var(--gold);margin-bottom:10px;opacity:0; -webkit-text-fill-color:var(--gold); text-transform:uppercase; }
+.ch-title { font-size:38px;font-weight:700;line-height:1.2;margin-bottom:6px;opacity:0; }
+.ch-title span { color:var(--gold); -webkit-text-fill-color:var(--gold); }
+.ch-en { font-size:12px;color:var(--text2);letter-spacing:.18em;opacity:0; -webkit-text-fill-color:var(--text2); }
+.ch-rule { width:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0; }
+.ch-desc { font-size:14px;line-height:1.9;color:var(--text2);opacity:0; -webkit-text-fill-color:var(--text2); }
+
+/* ════════════════════════════
+   씬 3 — 유물 사진 (누끼 없음)
+   ════════════════════════════ */
+#s3 {
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:60px 24px;
+  background:var(--bg);
+}
+.artifact-glow {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(180,140,50,.12) 0%,transparent 70%);
+}
+.artifact-frame {
+  position:relative; z-index:2; opacity:0; transform:scale(.88);
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 0 50px rgba(180,140,50,.12), 0 20px 40px rgba(0,0,0,.5);
+  max-width:320px; width:90vw;
+}
+.artifact-frame img {
+  width:100%; border-radius:10px;
+  display:block;
+}
+.artifact-caption {
+  margin-top:14px; text-align:center; z-index:2; opacity:0;
+}
+.artifact-caption h2 { font-size:20px;font-weight:700;color:var(--gold2); -webkit-text-fill-color:var(--gold2); margin-bottom:3px; }
+.artifact-caption p { font-size:11px;letter-spacing:.18em;color:var(--text2); -webkit-text-fill-color:var(--text2); text-transform:uppercase; }
+
+/* ════════════════════════════
+   씬 4 — 각궁 설명 (각궁 든 태용)
+   캐릭터: 정면, 각궁을 양손으로 들고 있음
+   → 캐릭터 하단, 텍스트 위에
+   ════════════════════════════ */
+#s4 {
+  display:flex; flex-direction:column;
+  align-items:center;
+  padding-top:50px;
+  background:linear-gradient(180deg,var(--bg) 0%,var(--bg3) 100%);
+}
+.s4-char { opacity:0; z-index:5; }
+.s4-char img { height:300px; width:auto; filter:drop-shadow(0 8px 24px rgba(0,0,0,.6)); }
+
+.s4-cards {
+  width:100%; padding:16px 20px 50px; z-index:10;
+}
+.info-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+  margin-bottom:14px;
+  opacity:0; transform:translateY(24px);
+  box-shadow:0 3px 16px rgba(0,0,0,.3);
+}
+.info-card h3 { font-size:11px;letter-spacing:.22em;color:var(--gold);margin-bottom:10px; -webkit-text-fill-color:var(--gold); text-transform:uppercase; }
+.info-card p { font-size:14px;line-height:1.85;color:var(--text); -webkit-text-fill-color:var(--text); }
+.info-card p b { color:var(--gold2); -webkit-text-fill-color:var(--gold2); }
+.mat-row { display:flex;flex-wrap:wrap;gap:7px;margin-top:12px; }
+.mat-chip {
+  background:rgba(200,168,75,.1); border:1px solid rgba(200,168,75,.28);
+  border-radius:20px; padding:5px 11px;
+  font-size:12px; color:var(--gold2); -webkit-text-fill-color:var(--gold2);
+  opacity:0;
+}
+
+/* ════════════════════════════
+   씬 5 — 손가락 포인팅 (왼쪽 봄 + 왼쪽 손가락)
+   캐릭터: 오른쪽 배치 → 텍스트: 왼쪽
+   ════════════════════════════ */
+#s5 {
+  position:relative;
+  min-height:100svh;
+  background:var(--bg2);
+  overflow:hidden;
+}
+.s5-char {
+  position:absolute;
+  bottom:0; right:-15px;
+  z-index:3; opacity:0;
+}
+.s5-char img {
+  height:72svh; max-height:500px; width:auto;
+  filter:drop-shadow(-6px 0 18px rgba(0,0,0,.55));
+}
+.s5-content {
+  position:relative; z-index:10;
+  padding:56px 20px 24px;
+  /* 왼쪽 절반만 사용 (캐릭터가 오른쪽에 있으므로) */
+  width:58%;
+}
+.fact-block {
+  margin-bottom:20px; opacity:0; transform:translateX(-18px);
+}
+.fact-block h4 {
+  font-size:13px; font-weight:700; color:var(--gold2); -webkit-text-fill-color:var(--gold2);
+  margin-bottom:5px;
+  display:flex; align-items:center; gap:7px;
+}
+.fact-block p { font-size:13px;line-height:1.75;color:var(--text2); -webkit-text-fill-color:var(--text2); }
+.fact-icon { font-size:16px; }
+
+/* ════════════════════════════
+   씬 6 — 옆모습 안내 (왼쪽 봄 + 왼손 내밀기)
+   캐릭터: 오른쪽 → 텍스트: 왼쪽
+   ════════════════════════════ */
+#s6 {
+  position:relative;
+  min-height:100svh;
+  background:linear-gradient(180deg,var(--bg3) 0%,var(--bg) 100%);
+  overflow:hidden;
+}
+.s6-char {
+  position:absolute;
+  bottom:0; right:-10px;
+  z-index:3; opacity:0;
+}
+.s6-char img {
+  height:68svh; max-height:480px; width:auto;
+  filter:drop-shadow(-8px 0 20px rgba(0,0,0,.6));
+}
+.s6-content {
+  position:relative; z-index:10;
+  padding:56px 20px 40px;
+  width:57%;
+}
+.s6-bubble {
+  margin-bottom:18px; opacity:0;
+}
+.next-info {
+  background:rgba(200,168,75,.08);
+  border:1px solid rgba(200,168,75,.22);
+  border-radius:12px; padding:16px; margin-bottom:12px;
+  opacity:0; transform:translateY(16px);
+}
+.next-info h4 { font-size:12px;letter-spacing:.18em;color:var(--gold);margin-bottom:6px; -webkit-text-fill-color:var(--gold); text-transform:uppercase; }
+.next-info p { font-size:13px;line-height:1.7;color:var(--text2); -webkit-text-fill-color:var(--text2); }
+.coming-chip {
+  display:inline-flex; align-items:center; gap:5px;
+  background:rgba(200,168,75,.12); border:1px solid rgba(200,168,75,.35);
+  border-radius:20px; padding:6px 13px;
+  font-size:10.5px; color:var(--gold); -webkit-text-fill-color:var(--gold);
+  letter-spacing:.1em; opacity:0; margin-top:6px;
+}
+</style>
+</head>
+<body>
+
+<div class="pdots" id="pdots">
+  <div class="pdot on" id="d0"></div>
+  <div class="pdot" id="d1"></div>
+  <div class="pdot" id="d2"></div>
+  <div class="pdot" id="d3"></div>
+  <div class="pdot" id="d4"></div>
+  <div class="pdot" id="d5"></div>
+</div>
+
+<!-- ══ 씬 1: 인트로 ══ -->
+<section class="scene" id="s1">
+  <div class="s1-badge" id="s1-badge" style="translate: none; rotate: none; scale: none; transform: translate(-50%, 0%) translate(-0.0531px, 0px); opacity: 1;">
+    <div class="bl"></div>
+    <div class="bt">Bucheon Bow Museum</div>
+    <div class="bk">부천시 활박물관</div>
+    <div class="bl" style="margin-top:5px;"></div>
+  </div>
+
+  <!-- 말풍선 먼저, 그 다음 캐릭터 -->
+  <div style="flex:1; display:flex; align-items:flex-end; padding:120px 22px 0; width:100%; z-index:20;">
+  </div>
+  <div class="s1-bubble-wrap" id="s1-bubble" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">
+    <div class="bubble tail-bl">
+      안녕! 나는 <b>태용</b>이야 👋<br>
+      오늘은 <em>두 가지</em>를 소개할게!<br><br>
+      🏹 <b>챕터 1</b> — 우리 전통 활, <b>각궁</b><br>
+      🎯 <b>챕터 2</b> — 근현대 활쏘기 문화<br><br>
+      스크롤 내리면서 잘 따라와줄거지?
+    </div>
+  </div>
+
+  <!-- 정면 캐릭터 아래 -->
+
+  <div class="s1-char" id="s1-char" style="opacity: 1;">
+    <img src="Tae/hi.png"
+  </div>
+
+  <div class="scroll-hint" id="s1-scroll" style="opacity: 1;">
+    <span>SCROLL</span>
+    <div class="sh-arrow"></div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬 2: 챕터 1 타이틀 ══ -->
+<section class="scene" id="s2">
+  <div class="ch-label" id="s2-label" style="translate: none; rotate: none; scale: none; transform: translate(-15px, 0px);">Chapter 01</div>
+  <div class="ch-title" id="s2-title" style="translate: none; rotate: none; scale: none; transform: translate(0px, 22px);">우리의 활<br><span>각궁</span></div>
+  <div class="ch-en" id="s2-en">Traditional Korean Composite Bow</div>
+  <div class="ch-rule" id="s2-rule"></div>
+  <div class="ch-desc" id="s2-desc" style="translate: none; rotate: none; scale: none; transform: translate(0px, 22px);">
+    하늘이 내린 재료들로 만든,<br>세계에서 가장 강력한 단궁 중 하나.
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬 3: 유물 사진 (누끼 없음) ══ -->
+<section class="scene" id="s3">
+  <div class="artifact-glow"></div>
+  <div class="artifact-frame" id="s3-frame" style="translate: none; rotate: none; scale: none; transform: translate3d(0px, -6.1773px, 0px) scale(0.88, 0.88);">
+    <img src="data:image/jpeg;base64,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" alt="호미명 각궁">
+  </div>
+  <div class="artifact-caption" id="s3-cap" style="translate: none; rotate: none; scale: none; transform: translate(0px, 16px);">
+    <h2>호미명 각궁</h2>
+    <p>Homimyeong GakGung · Traditional Bow</p>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬 4: 각궁 든 태용 + 설명 카드 ══
+     캐릭터 정면, 각궁 양손 → 상단 중앙, 텍스트 아래 -->
+<section class="scene" id="s4">
+
+  <div class="s4-char" id="s4-char">
+    <img src="Tae/Tae1.png">
+  </div>
+  <div class="s4-cards">
+    <div class="info-card" id="c1" style="translate: none; rotate: none; scale: none; transform: translate(0px, 24px);">
+      <h3>🏹 각궁이란?</h3>
+      <p>우리 전통 활은 <b>물소뿔, 대나무, 참나무, 뽕나무, 소힘줄, 자작나무 껍질</b> 등을 <b>민어 부레풀</b>같은 천연 접착제로 붙여 만들었어요.</p>
+      <p style="margin-top:9px;font-size:13px;color:var(--text2);-webkit-text-fill-color:var(--text2);">이러한 합성 방식으로 만든 활을 <b style="color:var(--gold);-webkit-text-fill-color:var(--gold)">각궁(角弓)</b>이라 부릅니다.</p>
+    </div>
+    <div class="info-card" id="c2" style="translate: none; rotate: none; scale: none; transform: translate(0px, 24px);">
+      <h3>⚡ 재료</h3>
+      <div class="mat-row">
+        <span class="mat-chip" id="m1" style="translate: none; rotate: none; scale: none; transform: scale(0.7, 0.7); opacity: 0;">🦬 물소뿔</span>
+        <span class="mat-chip" id="m2" style="translate: none; rotate: none; scale: none; transform: scale(0.7, 0.7); opacity: 0;">🎋 대나무</span>
+        <span class="mat-chip" id="m3" style="translate: none; rotate: none; scale: none; transform: scale(0.7, 0.7); opacity: 0;">🌳 참나무</span>
+        <span class="mat-chip" id="m4" style="translate: none; rotate: none; scale: none; transform: scale(0.7, 0.7); opacity: 0;">🌿 뽕나무</span>
+        <span class="mat-chip" id="m5" style="translate: none; rotate: none; scale: none; transform: scale(0.7, 0.7); opacity: 0;">🐄 소힘줄</span>
+        <span class="mat-chip" id="m6" style="translate: none; rotate: none; scale: none; transform: scale(0.7, 0.7); opacity: 0;">🪵 자작나무 껍질</span>
+        <span class="mat-chip" id="m7" style="translate: none; rotate: none; scale: none; transform: scale(0.7, 0.7); opacity: 0;">🐟 민어 부레풀</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬 5: 손가락 포인팅 ══
+     캐릭터: 왼쪽 보며 왼쪽 손가락 → 오른쪽에 배치
+     텍스트: 왼쪽 (캐릭터가 가리키는 방향) -->
+<section class="scene" id="s5">
+  <div class="s5-char" id="s5-char" style="translate: none; rotate: none; scale: none; transform: translate(40px, 0px); opacity: 0;">
+    <img src="Tae/Tae2.png">
+  </div>
+  <div class="s5-content">
+    <div class="fact-block" id="f1" style="translate: none; rotate: none; scale: none; transform: translate(-18px, 0px); opacity: 0;">
+      <h4><span class="fact-icon">🔄</span> 역반곡 구조</h4>
+      <p>시위 없이는 반대로 휘어있어 장력이 더 강해져!</p>
+    </div>
+    <div class="fact-block" id="f2" style="translate: none; rotate: none; scale: none; transform: translate(-18px, 0px); opacity: 0;">
+      <h4><span class="fact-icon">📏</span> 작지만 강해</h4>
+      <p>길이 약 120cm, 단궁이지만 서양 장궁을 능가해.</p>
+    </div>
+    <div class="fact-block" id="f3" style="translate: none; rotate: none; scale: none; transform: translate(-18px, 0px); opacity: 0;">
+      <h4><span class="fact-icon">🌡️</span> 천연 소재</h4>
+      <p>온도·습도에 적응하는 탄성, 조상들의 과학이야.</p>
+    </div>
+    <div class="fact-block" id="f4" style="translate: none; rotate: none; scale: none; transform: translate(-18px, 0px); opacity: 0;">
+      <h4><span class="fact-icon">🌏</span> 세계적 우수성</h4>
+      <p>크기는 작지만 탄성이 매우 커서 세계적으로 인정받고 있어!</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬 6: 옆모습 안내 ══
+     캐릭터: 왼쪽 보며 왼손 내밀기 → 오른쪽에 배치
+     텍스트: 왼쪽 (캐릭터가 바라보는/가리키는 방향) -->
+<section class="scene" id="s6">
+  <div class="s6-char" id="s6-char" style="translate: none; rotate: none; scale: none; transform: translate(50px, 0px); opacity: 0;">
+    <img src="Tae/Tae3.png">
+  </div>
+  <div class="s6-content">
+    <div class="s6-bubble" id="s6-bubble" style="opacity: 0;">
+      <div class="bubble tail-r">
+        각궁 설명은 여기까지야!<br>
+        다음 <b>챕터 2</b>에서는<br>
+        <b>근현대 활쏘기 문화</b>를<br>
+        알아볼 거야 🎯
+      </div>
+    </div>
+    <div class="next-info" id="n1" style="translate: none; rotate: none; scale: none; transform: translate(0px, 14px); opacity: 0;">
+      <h4>📖 다음 챕터 예고</h4>
+      <p>근현대 활쏘기가 어떻게 스포츠와 문화로 이어졌는지, 태용이 안내해 줄게!</p>
+    </div>
+    <div class="coming-chip" id="s6-chip" style="opacity: 0;">
+      <span>●</span>
+      <span>CHAPTER 2 · COMING SOON</span>
+    </div>
+  </div>
+</section>
+
+<script src="./부천시 활박물관 도슨트_files/gsap.min.js.다운로드"></script>
+<script src="./부천시 활박물관 도슨트_files/ScrollTrigger.min.js.다운로드"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── 진행 도트 ── */
+['s1','s2','s3','s4','s5','s6'].forEach((id,i) => {
+  ScrollTrigger.create({
+    trigger:'#'+id,
+    start:'top 55%',
+    end:'bottom 45%',
+    onEnter:()=>setDot(i),
+    onEnterBack:()=>setDot(i),
+  });
+});
+function setDot(i){
+  document.querySelectorAll('.pdot').forEach((d,j)=>d.classList.toggle('on',i===j));
+}
+
+/* ── 씬 1: 인트로 ── */
+const tl1 = gsap.timeline({delay:.3});
+tl1
+  .to('#s1-badge',  {opacity:1, y:0, duration:.7, ease:'power2.out'})
+  .to('#s1-bubble', {opacity:1, y:0, duration:.65, ease:'back.out(1.6)'}, '-=.1')
+  .from('#s1-char img', {y:80, duration:1, ease:'power3.out'}, '-=.3')
+  .to('#s1-char',   {opacity:1, duration:.6}, '<')
+  .to('#s1-scroll', {opacity:1, duration:.5}, '+=.3');
+
+gsap.set('#s1-badge', {y:-10});
+gsap.set('#s1-bubble', {y:15});
+
+/* ── 씬 2: 챕터 타이틀 ── */
+gsap.set(['#s2-title','#s2-desc'], {y:22});
+const tl2 = gsap.timeline({
+  scrollTrigger:{trigger:'#s2', start:'top 68%'}
+});
+tl2
+  .to('#s2-label', {opacity:1, x:0, duration:.5})
+  .to('#s2-title', {opacity:1, y:0, duration:.7, ease:'power3.out'}, '-=.1')
+  .to('#s2-en',    {opacity:1, duration:.5}, '-=.2')
+  .to('#s2-rule',  {width:'55%', duration:.7, ease:'power2.inOut'}, '-=.2')
+  .to('#s2-desc',  {opacity:1, y:0, duration:.6}, '-=.2');
+
+gsap.set('#s2-label', {x:-15});
+
+/* ── 씬 3: 유물 ── */
+gsap.set('#s3-cap', {y:16});
+const tl3 = gsap.timeline({
+  scrollTrigger:{trigger:'#s3', start:'top 65%'}
+});
+tl3
+  .to('#s3-frame', {opacity:1, scale:1, duration:1, ease:'elastic.out(1,.65)'})
+  .to('#s3-cap',   {opacity:1, y:0, duration:.6}, '-=.3');
+
+// 유물 살짝 떠다니기
+gsap.to('#s3-frame', {
+  y:-8, duration:2.8, repeat:-1, yoyo:true,
+  ease:'sine.inOut', delay:1.2
+});
+
+/* ── 씬 4: 각궁 든 태용 + 카드 ── */
+gsap.set(['#c1','#c2'], {y:24});
+const tl4 = gsap.timeline({
+  scrollTrigger:{trigger:'#s4', start:'top 70%'}
+});
+tl4
+  .from('#s4-char img', {scale:.9, duration:.8, ease:'back.out(1.5)'})
+  .to('#s4-char',  {opacity:1, duration:.6}, '<')
+  .to('#c1', {opacity:1, y:0, duration:.6, ease:'power2.out'}, '+=.05')
+  .to('#c2', {opacity:1, y:0, duration:.6, ease:'power2.out'}, '-=.25');
+
+// 재료 칩 순차 팝업
+['m1','m2','m3','m4','m5','m6','m7'].forEach((id,i)=>{
+  gsap.to('#'+id, {
+    opacity:1, scale:1, duration:.35, ease:'back.out(2)',
+    delay: i*.07,
+    scrollTrigger:{trigger:'#c2', start:'top 78%'}
+  });
+  gsap.set('#'+id, {scale:.7});
+});
+
+/* ── 씬 5: 손가락 포인팅 ──
+   캐릭터 오른쪽에서 슬라이드인 (왼쪽 보고 있으므로 오른쪽 배치)
+   텍스트는 왼쪽에서 슬라이드인 */
+gsap.set('#s5-char', {x:40});
+gsap.to('#s5-char', {
+  opacity:1, x:0, duration:.9, ease:'power3.out',
+  scrollTrigger:{trigger:'#s5', start:'top 68%'}
+});
+
+['f1','f2','f3','f4'].forEach((id,i)=>{
+  gsap.to('#'+id, {
+    opacity:1, x:0, duration:.55, ease:'power2.out',
+    delay: i*.12,
+    scrollTrigger:{trigger:'#s5', start:'top 60%'}
+  });
+});
+
+// 패럴랙스 - 캐릭터 조금 느리게
+gsap.to('#s5-char', {
+  y:-30, ease:'none',
+  scrollTrigger:{
+    trigger:'#s5', start:'top bottom', end:'bottom top', scrub:2
+  }
+});
+
+/* ── 씬 6: 옆모습 안내 ──
+   캐릭터 오른쪽에서 등장, 텍스트 왼쪽 */
+gsap.set('#s6-char', {x:50});
+gsap.to('#s6-char', {
+  opacity:1, x:0, duration:.9, ease:'power3.out',
+  scrollTrigger:{trigger:'#s6', start:'top 70%'}
+});
+
+gsap.to('#s6-bubble', {
+  opacity:1, duration:.6, ease:'back.out(1.5)',
+  delay:.35,
+  scrollTrigger:{trigger:'#s6', start:'top 65%'}
+});
+
+gsap.set(['#n1'], {y:14});
+gsap.to('#n1', {
+  opacity:1, y:0, duration:.6,
+  delay:.5,
+  scrollTrigger:{trigger:'#s6', start:'top 60%'}
+});
+gsap.to('#s6-chip', {
+  opacity:1, duration:.5, delay:.8,
+  scrollTrigger:{trigger:'#s6', start:'top 60%'}
+});
+
+gsap.to('#s6-char', {
+  y:-25, ease:'none',
+  scrollTrigger:{
+    trigger:'#s6', start:'top bottom', end:'bottom top', scrub:2
+  }
+});
+</script>
+
+</body></html>
