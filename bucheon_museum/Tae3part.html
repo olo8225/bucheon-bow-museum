@@ -265,8 +265,8 @@ body {
     <div class="bubble tail-bl">
       안녕! 나는 <b>태용</b>이야 👋<br>
       오늘은 <em>두 가지</em>를 소개할게!<br><br>
-      🏹 <b>챕터 1</b> — 우리 전통 활, <b>각궁</b><br>
-      🎯 <b>챕터 2</b> — 근현대 활쏘기 문화<br><br>
+      🏹 <b>챕터 3</b> — 우리 전통 활, <b>각궁</b><br>
+      🎯 <b>챕터 4</b> — 근현대 활쏘기 문화<br><br>
       스크롤 내리면서 잘 따라와줄거지?
     </div>
   </div>
@@ -340,19 +340,19 @@ body {
   <div class="s5-content">
     <div class="fact-block" id="f1" style="translate: none; rotate: none; scale: none; transform: translate(-18px, 0px); opacity: 0;">
       <h4><span class="fact-icon">🔄</span> 역반곡 구조</h4>
-      <p>시위 없이는 반대로 휘어있어 장력이 더 강해져!</p>
+      <p>시위가 없을 때 활끝이 반대로 휘는 구조로, 당길수록 더 큰 탄성을 내도록 설계됐어!</p>
     </div>
     <div class="fact-block" id="f2" style="translate: none; rotate: none; scale: none; transform: translate(-18px, 0px); opacity: 0;">
       <h4><span class="fact-icon">📏</span> 작지만 강해</h4>
-      <p>길이 약 120cm, 단궁이지만 서양 장궁을 능가해.</p>
+      <p>길이는 짧아도 강한 추진력을 내는 전통 복합궁이라, 작은 몸집에 비해 성능이 뛰어나!</p>
     </div>
     <div class="fact-block" id="f3" style="translate: none; rotate: none; scale: none; transform: translate(-18px, 0px); opacity: 0;">
       <h4><span class="fact-icon">🌡️</span> 천연 소재</h4>
-      <p>온도·습도에 적응하는 탄성, 조상들의 과학이야.</p>
+      <p>온도와 습도에 따라 반응하는 섬세한 활이야!</p>
     </div>
     <div class="fact-block" id="f4" style="translate: none; rotate: none; scale: none; transform: translate(-18px, 0px); opacity: 0;">
       <h4><span class="fact-icon">🌏</span> 세계적 우수성</h4>
-      <p>크기는 작지만 탄성이 매우 커서 세계적으로 인정받고 있어!</p>
+      <p>정교한 제작 방식 덕분에 세계적으로도 주목받는 한국의 전통 활이야!</p>
     </div>
   </div>
 </section>
@@ -367,7 +367,7 @@ body {
     <div class="s6-bubble" id="s6-bubble" style="opacity: 0;">
       <div class="bubble tail-r">
         각궁 설명은 여기까지야!<br>
-        다음 <b>챕터 2</b>에서는<br>
+        다음 <b>챕터 4</b>에서는<br>
         <b>근현대 활쏘기 문화</b>를<br>
         알아볼 거야 🎯
       </div>
@@ -377,13 +377,11 @@ body {
       <p>근현대 활쏘기가 어떻게 스포츠와 문화로 이어졌는지, 태용이 안내해 줄게!</p>
     </div>
     <div class="coming-chip" id="s6-chip" style="opacity: 0;">
-      <span>●</span>
-      <span>CHAPTER 2 · COMING SOON</span>
-    </div>
-  </div>
-  <a class="nav-btn" id="nav-btn" href="https://hyeyoon0524.github.io/bucheon-bow-museum/Suho_quiz_1_2.html" style="translate: none; rotate: none; scale: none; transform: translate(0px, 16px); opacity: 0;">
+      <a class="nav-btn" id="nav-btn" href="https://hyeyoon0524.github.io/bucheon-bow-museum/Suho_quiz_1_2.html" style="translate: none; rotate: none; scale: none; transform: translate(0px, 16px); opacity: 0;">
     <span>●</span><span>QUIZ · 수호와 복습하기</span>
   </a>
+    </div>
+  </div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js?v=1.1"></script>
@@ -472,8 +470,8 @@ const audios = {
   s2: new Audio('audio/s2_chapter.mp3'),
   s3: new Audio('audio/s3_explain.mp3'),
   s4: new Audio('audio/s4_explain2.mp3'),
-  s5: new Audio('audio/s6_facts.mp3'),
-  s6: new Audio('audio/s5_ending.mp3'),
+  s5: new Audio('audio/s5_facts.mp3'),
+  s6: new Audio('audio/s6_ending.mp3'),
 };
 let currentAudio = null;
 let muted = false;
@@ -494,7 +492,7 @@ function playAudio(key) {
 ['s1','s2','s3','s4','s5','s6'].forEach(key => {
   ScrollTrigger.create({
     trigger: '#' + key,
-    start: 'top 60%',
+    start: 'top 80%',
     onEnter: () => playAudio(key),
   });
 });
