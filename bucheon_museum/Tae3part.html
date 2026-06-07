@@ -93,7 +93,7 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 
 /* 씬 레이아웃 */
 #s1{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;background:radial-gradient(ellipse 90% 60% at 50% 100%,rgba(180,140,50,.07) 0%,transparent 70%),linear-gradient(180deg,#08080f 0%,var(--bg) 100%);}
-.s1-badge{position:absolute;top:40px;left:50%;transform:translateX(-50%);text-align:center;z-index:10;}
+.s1-badge{position:absolute;top:40px;left:0;right:0;text-align:center;z-index:10;}
 .s1-badge .bl{width:36px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 5px;}
 .s1-badge .bt{font-size:9.5px;letter-spacing:.32em;color:var(--gold);-webkit-text-fill-color:var(--gold);font-weight:300;}
 .s1-badge .bk{font-size:11px;color:rgba(200,168,75,.55);-webkit-text-fill-color:rgba(200,168,75,.55);letter-spacing:.12em;margin-top:3px;}
@@ -173,11 +173,11 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
     <div class="bl" style="margin-top:5px;"></div>
   </div>
   <div style="flex:1;display:flex;align-items:flex-end;padding:120px 22px 0;width:100%;z-index:20;"></div>
-  <div class="s1-bubble-wrap bubble-wrap">
-    <button class="audio-btn" id="btn-s1" data-label="태용의 인사" onclick="playAudio(&#39;s1&#39;,this)">
+     <button class="audio-btn" id="btn-s1" data-label="태용의 인사" onclick="playAudio(&#39;s1&#39;,this)">
       <span class="btn-icon">🔊</span> 태용의 인사
     </button>
-    <br>
+  <br>
+  <div class="s1-bubble-wrap bubble-wrap">
     <div class="bubble tail-bl">
       안녕! 나는 <b>태용</b>이야 👋<br>
       오늘은 <em>두 가지</em>를 소개할게!<br><br>
@@ -263,11 +263,11 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
   <div class="side-char">
     <img src="Tae/Tae2.png" alt="태용 포인팅">
   </div>
-  <div class="fact-content">
-    <button class="audio-btn" id="btn-s5" data-label="각궁 특징 설명듣기" onclick="playAudio(&#39;s5&#39;,this)" style="margin-top:8px;">
+  <button class="audio-btn" id="btn-s5" data-label="각궁 특징 설명듣기" onclick="playAudio(&#39;s5&#39;,this)" style="margin-top:8px;">
       <span class="btn-icon">🔊</span> 각궁 특징 설명듣기
     </button>
     <br>
+  <div class="fact-content">
     <div class="fact-block">
       <h4><span>🔄</span> 역반곡 구조</h4>
       <p>시위가 없을 때 활끝이 반대로 휘는 구조로, 당길수록 더 큰 탄성을 내도록 설계됐어.</p>
@@ -295,14 +295,15 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
     <img src="Tae/Tae3.png" alt="태용 마무리">
   </div>
   <div class="final-content">
-    <div class="s6-bubble">
-      <button class="audio-btn" id="btn-s6" data-label="태용의 인사" onclick="playAudio(&#39;s6&#39;,this)" style="margin-top:12px;">
+     <button class="audio-btn" id="btn-s6" data-label="태용의 인사" onclick="playAudio(&#39;s6&#39;,this)" style="margin-top:12px;">
         <span class="btn-icon">🔊</span> 태용의 인사
       </button>
       <br>
+    <div class="s6-bubble">
+     
       <div class="bubble tail-r">
         각궁 설명은 여기까지야!<br>
-        다음 <b>챕터 2</b>에서는<br>
+        다음 <b>챕터 4</b>에서는<br>
         <b>근현대 활쏘기 문화</b>를<br>
         알아볼 거야 🎯
       </div>
@@ -352,8 +353,8 @@ const audioFiles={
   s1:'audio/s1_intro.mp3',
   s3:'audio/s3_explain.mp3',
   s4:'audio/s4_explain2.mp3',
-  s5:'audio/s6_facts.mp3',
-  s6:'audio/s5_ending.mp3',
+  s5:'audio/s5_facts.mp3',
+  s6:'audio/s6_ending.mp3',
 };
 
 let currentAudio=null;
