@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0048)file:///C:/Users/USER/Downloads/Tae3part_v5.html -->
+<!-- saved from url=(0048)file:///C:/Users/USER/Downloads/Tae3part_v6.html -->
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>부천시 활박물관 — 태용 도슨트</title>
@@ -17,31 +17,22 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 .scene{width:100%;min-height:100svh;position:relative;overflow:hidden;background:var(--bg);}
 .section-rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.25;}
 
-/* 말풍선 */
-.bubble{
-  background:var(--bubble);border:1.5px solid var(--bline);border-radius:16px;
-  padding:15px 17px;font-size:14.5px;line-height:1.75;
-  color:var(--text);-webkit-text-fill-color:var(--text);
-  box-shadow:0 4px 20px rgba(0,0,0,.5);position:relative;
-}
+.bubble{background:var(--bubble);border:1.5px solid var(--bline);border-radius:16px;padding:15px 17px;font-size:14.5px;line-height:1.75;color:var(--text);-webkit-text-fill-color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.5);position:relative;}
 .bubble b{color:var(--gold2);-webkit-text-fill-color:var(--gold2);font-weight:600;}
 .bubble em{color:#8ecfff;-webkit-text-fill-color:#8ecfff;font-style:normal;}
 .bubble.tail-bl::after{content:'';position:absolute;bottom:-9px;left:22px;border-left:9px solid transparent;border-right:9px solid transparent;border-top:9px solid var(--bline);}
 .bubble.tail-r::after{content:'';position:absolute;top:22px;right:-9px;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:9px solid var(--bline);}
 
-/* 진행 도트 */
 .pdots{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:999;display:flex;flex-direction:column;gap:7px;}
 .pdot{width:5px;height:5px;border-radius:3px;background:rgba(200,168,75,.25);transition:all .3s;}
 .pdot.on{height:18px;background:var(--gold);}
 
-/* reveal 애니메이션 (시온 방식) */
 .badge,.bubble-wrap,.intro-char,.scroll-hint,
 .ch-label,.ch-title,.ch-en,.ch-desc,
 .artifact-frame,.artifact-caption,
 .info-card,.fact-block,.side-char,
 .s6-bubble,.next-info,.coming-chip{
-  opacity:0;
-  transition:opacity .72s ease, transform .72s cubic-bezier(.2,.8,.2,1);
+  opacity:0;transition:opacity .72s ease, transform .72s cubic-bezier(.2,.8,.2,1);
 }
 .bubble-wrap{transform:translateY(18px);}
 .intro-char{transform:translateY(82px);}
@@ -84,12 +75,11 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 .scene:not(.in-view) .artifact-frame{animation:none;}
 @keyframes softFloat{from{translate:0 0;}to{translate:0 -8px;}}
 
-/* ── 음성 버튼 ── */
+/* 음성 버튼 */
 .audio-btn{
   display:inline-flex;align-items:center;gap:8px;
   margin-top:14px;
-  background:rgba(200,168,75,.1);
-  border:1px solid rgba(200,168,75,.35);
+  background:rgba(200,168,75,.1);border:1px solid rgba(200,168,75,.35);
   border-radius:30px;padding:8px 16px;
   font-size:13px;color:var(--gold2);-webkit-text-fill-color:var(--gold2);
   cursor:pointer;transition:all .2s;letter-spacing:.05em;
@@ -97,24 +87,12 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 }
 .audio-btn:hover{background:rgba(200,168,75,.2);}
 .audio-btn:active{transform:scale(.96);}
-.audio-btn.playing{
-  background:rgba(200,168,75,.2);
-  border-color:var(--gold2);
-  animation:btnPulse 1.5s infinite;
-}
-@keyframes btnPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(200,168,75,.3);}
-  50%{box-shadow:0 0 0 6px rgba(200,168,75,0);}
-}
+.audio-btn.playing{background:rgba(200,168,75,.2);border-color:var(--gold2);animation:btnPulse 1.5s infinite;}
+@keyframes btnPulse{0%,100%{box-shadow:0 0 0 0 rgba(200,168,75,.3);}50%{box-shadow:0 0 0 6px rgba(200,168,75,0);}}
 .audio-btn .btn-icon{font-size:16px;}
 
-/* ── 씬별 레이아웃 ── */
-/* 씬 1: 인트로 */
-#s1{
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-  background:radial-gradient(ellipse 90% 60% at 50% 100%,rgba(180,140,50,.07) 0%,transparent 70%),
-             linear-gradient(180deg,#08080f 0%,var(--bg) 100%);
-}
+/* 씬 레이아웃 */
+#s1{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;background:radial-gradient(ellipse 90% 60% at 50% 100%,rgba(180,140,50,.07) 0%,transparent 70%),linear-gradient(180deg,#08080f 0%,var(--bg) 100%);}
 .s1-badge{position:absolute;top:40px;left:50%;transform:translateX(-50%);text-align:center;z-index:10;}
 .s1-badge .bl{width:36px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 5px;}
 .s1-badge .bt{font-size:9.5px;letter-spacing:.32em;color:var(--gold);-webkit-text-fill-color:var(--gold);font-weight:300;}
@@ -127,7 +105,6 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 .sh-arrow{width:18px;height:18px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);animation:abounce 1.4s infinite;}
 @keyframes abounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(5px)}}
 
-/* 씬 2: 챕터 */
 #s2{display:flex;flex-direction:column;justify-content:center;padding:70px 28px 60px;background:linear-gradient(180deg,var(--bg2) 0%,var(--bg3) 100%);}
 .ch-label{font-size:10px;letter-spacing:.4em;color:var(--gold);-webkit-text-fill-color:var(--gold);margin-bottom:10px;text-transform:uppercase;}
 .ch-title{font-size:38px;font-weight:700;line-height:1.2;margin-bottom:6px;}
@@ -136,7 +113,6 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 .ch-rule{width:55%;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0;}
 .ch-desc{font-size:14px;line-height:1.9;color:var(--text2);-webkit-text-fill-color:var(--text2);}
 
-/* 씬 3: 유물 */
 #s3{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;background:var(--bg);}
 .artifact-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(180,140,50,.12) 0%,transparent 70%);}
 .artifact-frame{position:relative;z-index:2;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;box-shadow:0 0 50px rgba(180,140,50,.12),0 20px 40px rgba(0,0,0,.5);max-width:320px;width:90vw;}
@@ -145,7 +121,6 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 .artifact-caption h2{font-size:20px;font-weight:700;color:var(--gold2);-webkit-text-fill-color:var(--gold2);margin-bottom:3px;}
 .artifact-caption p{font-size:11px;letter-spacing:.18em;color:var(--text2);-webkit-text-fill-color:var(--text2);text-transform:uppercase;}
 
-/* 씬 4: 카드 */
 #s4{display:flex;flex-direction:column;align-items:center;padding:50px 20px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg3) 100%);}
 .s4-top-char{display:flex;justify-content:center;margin-bottom:-10px;}
 .s4-top-char img{height:280px;width:auto;filter:drop-shadow(0 8px 24px rgba(0,0,0,.6));}
@@ -156,7 +131,6 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 .mat-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
 .mat-chip{background:rgba(200,168,75,.1);border:1px solid rgba(200,168,75,.28);border-radius:20px;padding:5px 11px;font-size:12px;color:var(--gold2);-webkit-text-fill-color:var(--gold2);}
 
-/* 씬 5: 팩트 (캐릭터 오른쪽) */
 #s5{position:relative;min-height:100svh;background:var(--bg2);overflow:hidden;}
 .side-char{position:absolute;bottom:0;right:-10px;z-index:3;}
 .side-char img{height:68svh;max-height:480px;width:auto;filter:drop-shadow(-8px 0 20px rgba(0,0,0,.6));}
@@ -165,7 +139,6 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 .fact-block h4{font-size:13px;font-weight:700;color:var(--gold2);-webkit-text-fill-color:var(--gold2);margin-bottom:5px;display:flex;align-items:center;gap:7px;}
 .fact-block p{font-size:13px;line-height:1.75;color:var(--text2);-webkit-text-fill-color:var(--text2);}
 
-/* 씬 6: 마무리 (캐릭터 오른쪽) */
 #s6{position:relative;min-height:100svh;background:linear-gradient(180deg,var(--bg3) 0%,var(--bg) 100%);overflow:hidden;}
 .final-content{position:relative;z-index:10;padding:56px 20px 40px;width:57%;}
 .s6-bubble{margin-bottom:18px;}
@@ -174,17 +147,7 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 .next-info p{font-size:13px;line-height:1.7;color:var(--text2);-webkit-text-fill-color:var(--text2);}
 .coming-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(200,168,75,.12);border:1px solid rgba(200,168,75,.35);border-radius:20px;padding:6px 13px;font-size:10.5px;color:var(--gold);-webkit-text-fill-color:var(--gold);letter-spacing:.1em;margin-top:6px;}
 
-/* nav 버튼 */
-.nav-btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  gap:9px;min-height:58px;padding:0 22px;margin-top:14px;
-  border:1px solid rgba(232,204,128,.72);border-radius:14px;
-  background:linear-gradient(135deg,#e8cc80 0%,#c8a84b 100%);
-  color:#15100a!important;-webkit-text-fill-color:#15100a!important;
-  text-decoration:none;font-size:14px;font-weight:800;letter-spacing:.04em;
-  box-shadow:0 12px 28px rgba(200,168,75,.28),0 0 0 1px rgba(255,255,255,.08) inset;
-  transition:transform .18s ease,filter .18s ease;
-}
+.nav-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:58px;padding:0 22px;margin-top:14px;border:1px solid rgba(232,204,128,.72);border-radius:14px;background:linear-gradient(135deg,#e8cc80 0%,#c8a84b 100%);color:#15100a!important;-webkit-text-fill-color:#15100a!important;text-decoration:none;font-size:14px;font-weight:800;letter-spacing:.04em;box-shadow:0 12px 28px rgba(200,168,75,.28),0 0 0 1px rgba(255,255,255,.08) inset;transition:transform .18s ease,filter .18s ease;}
 .nav-btn::after{content:'›';font-size:24px;line-height:1;margin-top:-1px;}
 .nav-btn:active{transform:scale(.97);}
 .nav-btn:hover{filter:brightness(1.08);}
@@ -193,15 +156,15 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 <body>
 
 <div class="pdots" id="pdots">
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
   <div class="pdot on"></div>
-  <div class="pdot"></div>
-  <div class="pdot"></div>
-  <div class="pdot"></div>
-  <div class="pdot"></div>
   <div class="pdot"></div>
 </div>
 
-<!-- ══ 씬 1: 인트로 ══ -->
+<!-- ══ 씬 1 ══ -->
 <section class="scene in-view" id="s1">
   <div class="s1-badge badge">
     <div class="bl"></div>
@@ -211,7 +174,7 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
   </div>
   <div style="flex:1;display:flex;align-items:flex-end;padding:120px 22px 0;width:100%;z-index:20;"></div>
   <div class="s1-bubble-wrap bubble-wrap">
-      <button class="audio-btn" onclick="playAudio(&#39;s1&#39;)">
+    <button class="audio-btn" id="btn-s1" data-label="태용의 인사" onclick="playAudio(&#39;s1&#39;,this)">
       <span class="btn-icon">🔊</span> 태용의 인사
     </button>
     <div class="bubble tail-bl">
@@ -221,10 +184,9 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
       🎯 <b>챕터 4</b> — 근현대 활쏘기 문화<br><br>
       스크롤 내리면서 잘 따라와줄거지?
     </div>
-  
   </div>
   <div class="intro-char">
-    <img src="Tae/hi.png" alt="태용">
+    <img src="file:///C:/Users/USER/Downloads/Tae/hi.png" alt="태용">
   </div>
   <div class="scroll-hint">
     <span>SCROLL</span>
@@ -234,7 +196,7 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 
 <div class="section-rule"></div>
 
-<!-- ══ 씬 2: 챕터 타이틀 ══ -->
+<!-- ══ 씬 2: 챕터 (음성 없음) ══ -->
 <section class="scene in-view" id="s2">
   <div class="ch-label">Chapter 01</div>
   <div class="ch-title">우리의 활<br><span>각궁</span></div>
@@ -243,21 +205,20 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
   <div class="ch-desc">
     하늘이 내린 재료들로 만든,<br>세계에서 가장 강력한 단궁 중 하나.
   </div>
-
 </section>
 
 <div class="section-rule"></div>
 
-<!-- ══ 씬 3: 유물 ══ -->
-<section class="scene" id="s3">
+<!-- ══ 씬 3 ══ -->
+<section class="scene in-view" id="s3">
   <div class="artifact-glow"></div>
   <div class="artifact-frame">
-    <img src="Tae/GakGung.png" alt="호미명 각궁">
+    <img src="file:///C:/Users/USER/Downloads/Tae/GakGung.png" alt="호미명 각궁">
   </div>
   <div class="artifact-caption">
     <h2>호미명 각궁</h2>
     <p>Homimyeong GakGung · Traditional Bow</p>
-    <button class="audio-btn" onclick="playAudio(&#39;s3&#39;)" style="margin-top:12px;">
+    <button class="audio-btn" id="btn-s3" data-label="태용 목소리 듣기" onclick="playAudio(&#39;s3&#39;,this)" style="margin-top:12px;">
       <span class="btn-icon">🔊</span> 태용 목소리 듣기
     </button>
   </div>
@@ -265,14 +226,14 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 
 <div class="section-rule"></div>
 
-<!-- ══ 씬 4: 각궁 설명 ══ -->
-<section class="scene" id="s4">
+<!-- ══ 씬 4 ══ -->
+<section class="scene in-view" id="s4">
   <div class="s4-top-char">
-    <img src="Tae/Tae1.png" alt="태용 각궁 설명">
+    <img src="file:///C:/Users/USER/Downloads/Tae/Tae1.png" alt="태용 각궁 설명">
   </div>
-     <button class="audio-btn" onclick="playAudio(&#39;s4&#39;)" style="margin-top:14px;">
-      <span class="btn-icon">🔊</span> 각궁이란?
-    </button>
+  <button class="audio-btn" id="btn-s4" data-label="각궁이란?" onclick="playAudio(&#39;s4&#39;,this)" style="margin-top:14px;">
+    <span class="btn-icon">🔊</span> 각궁이란?
+  </button>
   <div class="info-card">
     <h3>🏹 각궁이란?</h3>
     <p>우리 전통 활은 <b>물소뿔, 대나무, 참나무, 뽕나무, 소힘줄, 자작나무 껍질</b> 등을 <b>민어 부레풀</b>같은 천연 접착제로 붙여 만들었어요.</p>
@@ -289,19 +250,18 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
       <span class="mat-chip">🪵 자작나무 껍질</span>
       <span class="mat-chip">🐟 민어 부레풀</span>
     </div>
- 
   </div>
 </section>
 
 <div class="section-rule"></div>
 
-<!-- ══ 씬 5: 팩트 (캐릭터 오른쪽, 텍스트 왼쪽) ══ -->
-<section class="scene" id="s5">
+<!-- ══ 씬 5 ══ -->
+<section class="scene in-view" id="s5">
   <div class="side-char">
-    <img src="Tae/Tae2.png" alt="태용 포인팅">
+    <img src="file:///C:/Users/USER/Downloads/Tae/Tae2.png" alt="태용 포인팅">
   </div>
   <div class="fact-content">
-     <button class="audio-btn" onclick="playAudio(&#39;s5&#39;)" style="margin-top:8px;">
+    <button class="audio-btn" id="btn-s5" data-label="각궁 특징 설명듣기" onclick="playAudio(&#39;s5&#39;,this)" style="margin-top:8px;">
       <span class="btn-icon">🔊</span> 각궁 특징 설명듣기
     </button>
     <div class="fact-block">
@@ -320,22 +280,21 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
       <h4><span>🌏</span> 세계적 우수성</h4>
       <p>정교한 제작 방식 덕분에 세계적으로도 주목받는 한국의 전통 활이야!</p>
     </div>
-   
   </div>
 </section>
 
 <div class="section-rule"></div>
 
-<!-- ══ 씬 6: 마무리 (캐릭터 오른쪽, 텍스트 왼쪽) ══ -->
-<section class="scene" id="s6">
+<!-- ══ 씬 6 ══ -->
+<section class="scene in-view" id="s6">
   <div class="side-char">
-    <img src="Tae/Tae3.png" alt="태용 마무리">
+    <img src="file:///C:/Users/USER/Downloads/Tae/Tae3.png" alt="태용 마무리">
   </div>
   <div class="final-content">
     <div class="s6-bubble">
-      <button class="audio-btn" onclick="playAudio(&#39;s6&#39;)" style="margin-top:12px;">
-      <span class="btn-icon">🔊</span> 태용의 인사
-    </button>
+      <button class="audio-btn" id="btn-s6" data-label="태용의 인사" onclick="playAudio(&#39;s6&#39;,this)" style="margin-top:12px;">
+        <span class="btn-icon">🔊</span> 태용의 인사
+      </button>
       <div class="bubble tail-r">
         각궁 설명은 여기까지야!<br>
         다음 <b>챕터 2</b>에서는<br>
@@ -354,102 +313,79 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
   </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js?v=1.1"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js?v=1.1"></script>
+<script src="./Tae3part_files/gsap.min.js.다운로드"></script>
+<script src="./Tae3part_files/ScrollTrigger.min.js.다운로드"></script>
 <script>
-/* ── 시온 방식 reveal ── */
+/* 시온 방식 reveal */
 (()=>{
-  const scenes = [...document.querySelectorAll('.scene')];
-  const dots = document.getElementById('pdots');
-
-  function setDot(i){
-    document.querySelectorAll('.pdot').forEach((d,j)=>d.classList.toggle('on',i===j));
-  }
-  function reveal(scene){ if(scene) scene.classList.add('in-view'); }
+  const scenes=[...document.querySelectorAll('.scene')];
+  function setDot(i){document.querySelectorAll('.pdot').forEach((d,j)=>d.classList.toggle('on',i===j));}
+  function reveal(s){if(s)s.classList.add('in-view');}
   function checkScenes(){
-    const mid = window.innerHeight * .52;
-    let active = 0;
+    const mid=window.innerHeight*.52;let active=0;
     scenes.forEach((scene,i)=>{
-      const r = scene.getBoundingClientRect();
-      if(r.top < window.innerHeight*.86 && r.bottom > window.innerHeight*.14) reveal(scene);
-      if(r.top <= mid && r.bottom >= mid) active = i;
+      const r=scene.getBoundingClientRect();
+      if(r.top<window.innerHeight*.86&&r.bottom>window.innerHeight*.14)reveal(scene);
+      if(r.top<=mid&&r.bottom>=mid)active=i;
     });
     setDot(active);
   }
-
-  const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting) reveal(e.target); });
-    checkScenes();
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting)reveal(e.target);});checkScenes();
   },{threshold:.12,rootMargin:'0px 0px -3% 0px'});
   scenes.forEach(s=>observer.observe(s));
-
-  let ticking = false;
-  window.addEventListener('scroll',()=>{
-    if(!ticking){ requestAnimationFrame(()=>{ checkScenes(); ticking=false; }); ticking=true; }
-  },{passive:true});
-  window.addEventListener('resize', checkScenes);
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded', checkScenes, {once:true});
-  } else {
-    requestAnimationFrame(checkScenes);
-  }
-  setInterval(checkScenes, 250);
+  let ticking=false;
+  window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{checkScenes();ticking=false;});ticking=true;}},{passive:true});
+  window.addEventListener('resize',checkScenes);
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',checkScenes,{once:true});}
+  else{requestAnimationFrame(checkScenes);}
+  setInterval(checkScenes,250);
 })();
 
-/* ── 오디오 버튼 ── */
-const audioFiles = {
-  s1: 'audio/s1_intro.mp3',
-  s2: 'audio/s2_chapter.mp3',
-  s3: 'audio/s3_explain.mp3',
-  s4: 'audio/s4_explain2.mp3',
-  s5: 'audio/s6_facts.mp3',
-  s6: 'audio/s5_ending.mp3',
+/* 오디오 */
+const audioFiles={
+  s1:'audio/s1_intro.mp3',
+  s3:'audio/s3_explain.mp3',
+  s4:'audio/s4_explain2.mp3',
+  s5:'audio/s6_facts.mp3',
+  s6:'audio/s5_ending.mp3',
 };
 
-let currentAudio = null;
-let currentBtn = null;
+let currentAudio=null;
+let currentBtn=null;
 
-function playAudio(key){
-  // 재생 중이면 정지
+function playAudio(key, btn){
+  const label = btn.getAttribute('data-label') || '태용 목소리 듣기';
+
+  /* 현재 재생 중인 오디오 정지 */
   if(currentAudio && !currentAudio.paused){
     currentAudio.pause();
-    currentAudio.currentTime = 0;
+    currentAudio.currentTime=0;
     if(currentBtn){
       currentBtn.classList.remove('playing');
-      currentBtn.innerHTML = '<span class="btn-icon">🔊</span> 태용 목소리 듣기';
+      currentBtn.innerHTML='<span class="btn-icon">🔊</span> '+currentBtn.getAttribute('data-label');
     }
-    // 같은 버튼이면 정지만 하고 끝
-    const clickedBtn = document.querySelector('#' + key + '-btn') ||
-      event.currentTarget || event.target;
-    if(currentBtn === clickedBtn){ currentAudio=null; currentBtn=null; return; }
+    /* 같은 버튼이면 정지만 하고 끝 */
+    if(currentBtn===btn){currentAudio=null;currentBtn=null;return;}
   }
 
-  const audio = new Audio(audioFiles[key]);
-  currentAudio = audio;
+  const audio=new Audio(audioFiles[key]);
+  currentAudio=audio;
+  currentBtn=btn;
 
-  // 클릭된 버튼 찾기
-  const btn = event.target.closest('.audio-btn');
-  currentBtn = btn;
-
-  if(btn){
-    btn.classList.add('playing');
-    btn.innerHTML = '<span class="btn-icon">⏸</span> 재생 중...';
-  }
+  btn.classList.add('playing');
+  btn.innerHTML='<span class="btn-icon">⏸</span> 재생 중...';
 
   audio.play().catch(()=>{
-    if(btn){
-      btn.classList.remove('playing');
-      btn.innerHTML = '<span class="btn-icon">🔊</span> 태용 목소리 듣기';
-    }
+    btn.classList.remove('playing');
+    btn.innerHTML='<span class="btn-icon">🔊</span> '+label;
+    currentAudio=null;currentBtn=null;
   });
 
-  audio.addEventListener('ended', ()=>{
-    if(btn){
-      btn.classList.remove('playing');
-      btn.innerHTML = '<span class="btn-icon">🔊</span> 태용 목소리 듣기';
-    }
-    currentAudio = null;
-    currentBtn = null;
+  audio.addEventListener('ended',()=>{
+    btn.classList.remove('playing');
+    btn.innerHTML='<span class="btn-icon">🔊</span> '+label;
+    currentAudio=null;currentBtn=null;
   });
 }
 </script>
