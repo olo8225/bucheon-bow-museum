@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///C:/Users/USER/Downloads/Tae4part.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>부천시 활박물관 — 태용 도슨트 Chapter 03</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  color-scheme:only dark;
+  --bg:#0c0c10;--bg2:#12121a;--bg3:#181824;--card:#1c1c28;
+  --gold:#c8a84b;--gold2:#e8cc80;--text:#ede8dc;--text2:#9a8f7a;
+  --bubble:#16202e;--bline:rgba(100,160,230,.35);--border:rgba(200,168,75,.2);
+}
+html,body{background:var(--bg)!important;color:var(--text)!important;-webkit-text-fill-color:var(--text);}
+body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;overflow-x:hidden;}
+
+.scene{width:100%;min-height:100svh;position:relative;overflow:hidden;background:var(--bg);}
+.section-rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.25;}
+
+.bubble{background:var(--bubble);border:1.5px solid var(--bline);border-radius:16px;padding:15px 17px;font-size:14.5px;line-height:1.75;color:var(--text);-webkit-text-fill-color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.5);position:relative;}
+.bubble b{color:var(--gold2);-webkit-text-fill-color:var(--gold2);font-weight:600;}
+.bubble em{color:#8ecfff;-webkit-text-fill-color:#8ecfff;font-style:normal;}
+.bubble.tail-bl::after{content:'';position:absolute;bottom:-9px;left:22px;border-left:9px solid transparent;border-right:9px solid transparent;border-top:9px solid var(--bline);}
+.bubble.tail-r::after{content:'';position:absolute;top:22px;right:-9px;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:9px solid var(--bline);}
+
+.pdots{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:999;display:flex;flex-direction:column;gap:7px;}
+.pdot{width:5px;height:5px;border-radius:3px;background:rgba(200,168,75,.25);transition:all .3s;}
+.pdot.on{height:18px;background:var(--gold);}
+
+.badge,.bubble-wrap,.intro-char,.scroll-hint,
+.ch-label,.ch-title,.ch-en,.ch-desc,
+.artifact-frame,.artifact-caption,
+.info-card,.fact-block,.side-char,
+.s6-bubble,.next-info,.coming-chip{
+  opacity:0;transition:opacity .72s ease, transform .72s cubic-bezier(.2,.8,.2,1);
+}
+.bubble-wrap{transform:translateY(18px);}
+.intro-char{transform:translateY(82px);}
+.scroll-hint{transform:translateX(-50%) translateY(8px);}
+.ch-label{transform:translateX(-16px);}
+.ch-title,.ch-desc{transform:translateY(24px);}
+.ch-en{transform:translateY(10px);}
+.ch-rule{transform:scaleX(0);transform-origin:left center;transition:transform .8s cubic-bezier(.2,.8,.2,1);}
+.artifact-frame{transform:translateY(18px) scale(.9);}
+.artifact-caption{transform:translateY(16px);}
+.info-card{transform:translateY(28px);}
+.fact-block{transform:translateX(-22px);}
+.side-char{transform:translateX(52px);}
+.s6-bubble,.next-info,.coming-chip{transform:translateY(16px);}
+
+.scene.in-view .badge,.scene.in-view .bubble-wrap,.scene.in-view .intro-char,
+.scene.in-view .scroll-hint,.scene.in-view .ch-label,.scene.in-view .ch-title,
+.scene.in-view .ch-en,.scene.in-view .ch-desc,.scene.in-view .artifact-frame,
+.scene.in-view .artifact-caption,.scene.in-view .info-card,.scene.in-view .fact-block,
+.scene.in-view .side-char,.scene.in-view .s6-bubble,.scene.in-view .next-info,
+.scene.in-view .coming-chip{opacity:1;transform:translate(0,0) scale(1);}
+.scene.in-view .scroll-hint{transform:translateX(-50%) translateY(0);}
+.scene.in-view .ch-rule{transform:scaleX(1);}
+
+.scene.in-view .ch-title{transition-delay:.08s;}
+.scene.in-view .ch-en{transition-delay:.16s;}
+.scene.in-view .ch-rule{transition-delay:.22s;}
+.scene.in-view .ch-desc{transition-delay:.3s;}
+.scene.in-view .artifact-caption{transition-delay:.22s;}
+.scene.in-view .info-card:nth-of-type(1){transition-delay:.08s;}
+.scene.in-view .info-card:nth-of-type(2){transition-delay:.2s;}
+.scene.in-view .info-card:nth-of-type(3){transition-delay:.32s;}
+.scene.in-view .fact-block:nth-child(1){transition-delay:.05s;}
+.scene.in-view .fact-block:nth-child(2){transition-delay:.16s;}
+.scene.in-view .fact-block:nth-child(3){transition-delay:.27s;}
+.scene.in-view .fact-block:nth-child(4){transition-delay:.38s;}
+.scene.in-view .next-info{transition-delay:.18s;}
+.scene.in-view .coming-chip{transition-delay:.34s;}
+
+.artifact-frame{animation:softFloat 3.1s ease-in-out infinite alternate;}
+.scene:not(.in-view) .artifact-frame{animation:none;}
+@keyframes softFloat{from{translate:0 0;}to{translate:0 -8px;}}
+
+/* 음성 버튼 */
+.audio-btn{
+  display:inline-flex;align-items:center;gap:8px;margin-top:14px;
+  background:rgba(200,168,75,.1);border:1px solid rgba(200,168,75,.35);
+  border-radius:30px;padding:8px 16px;
+  font-size:13px;color:var(--gold2);-webkit-text-fill-color:var(--gold2);
+  cursor:pointer;transition:all .2s;letter-spacing:.05em;
+  -webkit-appearance:none;appearance:none;
+}
+.audio-btn:hover{background:rgba(200,168,75,.2);}
+.audio-btn:active{transform:scale(.96);}
+.audio-btn.playing{background:rgba(200,168,75,.2);border-color:var(--gold2);animation:btnPulse 1.5s infinite;}
+@keyframes btnPulse{0%,100%{box-shadow:0 0 0 0 rgba(200,168,75,.3);}50%{box-shadow:0 0 0 6px rgba(200,168,75,0);}}
+.audio-btn .btn-icon{font-size:16px;}
+
+/* 씬 1: 인트로 */
+#s1{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;background:radial-gradient(ellipse 90% 60% at 50% 100%,rgba(180,140,50,.07) 0%,transparent 70%),linear-gradient(180deg,#08080f 0%,var(--bg) 100%);}
+.s1-badge{position:absolute;top:40px;left:0;right:0;text-align:center;z-index:10;}
+.s1-badge .bl{width:36px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 5px;}
+.s1-badge .bt{font-size:9.5px;letter-spacing:.32em;color:var(--gold);-webkit-text-fill-color:var(--gold);font-weight:300;}
+.s1-badge .bk{font-size:11px;color:rgba(200,168,75,.55);-webkit-text-fill-color:rgba(200,168,75,.55);letter-spacing:.12em;margin-top:3px;}
+.s1-bubble-wrap{width:100%;padding:0 22px;z-index:20;}
+.intro-char{z-index:10;display:flex;justify-content:center;margin-top:-20px;}
+.intro-char img{height:320px;width:auto;filter:drop-shadow(0 6px 20px rgba(0,0,0,.6));}
+.scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:5px;}
+.scroll-hint span{font-size:9px;letter-spacing:.25em;color:var(--text2);-webkit-text-fill-color:var(--text2);}
+.sh-arrow{width:18px;height:18px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);animation:abounce 1.4s infinite;}
+@keyframes abounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(5px)}}
+
+/* 씬 2: 챕터 */
+#s2{display:flex;flex-direction:column;justify-content:center;padding:70px 28px 60px;background:linear-gradient(180deg,var(--bg2) 0%,var(--bg3) 100%);}
+.ch-label{font-size:10px;letter-spacing:.4em;color:var(--gold);-webkit-text-fill-color:var(--gold);margin-bottom:10px;text-transform:uppercase;}
+.ch-title{font-size:38px;font-weight:700;line-height:1.2;margin-bottom:6px;}
+.ch-title span{color:var(--gold);-webkit-text-fill-color:var(--gold);}
+.ch-en{font-size:12px;color:var(--text2);-webkit-text-fill-color:var(--text2);letter-spacing:.18em;}
+.ch-rule{width:55%;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0;}
+.ch-desc{font-size:14px;line-height:1.9;color:var(--text2);-webkit-text-fill-color:var(--text2);}
+
+/* 씬 3: 대사례 소개 (카드형) */
+#s3{display:flex;flex-direction:column;align-items:center;padding:50px 20px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg3) 100%);}
+.s3-top-char{display:flex;justify-content:center;margin-bottom:-10px;}
+.s3-top-char img{height:340px;width:auto;max-width:92vw;object-fit:contain;filter:drop-shadow(0 8px 24px rgba(0,0,0,.6));}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:0 3px 16px rgba(0,0,0,.3);max-width:560px;width:100%;}
+.info-card h3{font-size:11px;letter-spacing:.16em;color:var(--gold);-webkit-text-fill-color:var(--gold);margin-bottom:10px;text-transform:uppercase;}
+.info-card p{font-size:14px;line-height:1.85;color:var(--text);-webkit-text-fill-color:var(--text);}
+.info-card p+p{margin-top:9px;}
+.info-card p b{color:var(--gold2);-webkit-text-fill-color:var(--gold2);}
+.mat-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
+.mat-chip{background:rgba(200,168,75,.1);border:1px solid rgba(200,168,75,.28);border-radius:20px;padding:5px 11px;font-size:12px;color:var(--gold2);-webkit-text-fill-color:var(--gold2);}
+
+/* 유물(그림) 씬 공통 */
+.artifact-scene{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;background:var(--bg);}
+.artifact-glow{position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(180,140,50,.12) 0%,transparent 70%);}
+.artifact-frame{position:relative;z-index:2;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px;box-shadow:0 0 50px rgba(180,140,50,.12),0 20px 40px rgba(0,0,0,.5);max-width:420px;width:92vw;}
+.artifact-frame img{width:100%;border-radius:10px;display:block;}
+.artifact-caption{margin-top:14px;text-align:center;z-index:2;max-width:560px;}
+.artifact-caption h2{font-size:22px;font-weight:700;color:var(--gold2);-webkit-text-fill-color:var(--gold2);margin-bottom:3px;}
+.artifact-caption .sub{font-size:11px;letter-spacing:.18em;color:var(--text2);-webkit-text-fill-color:var(--text2);text-transform:uppercase;}
+.artifact-desc{margin-top:16px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:left;box-shadow:0 3px 16px rgba(0,0,0,.3);}
+.artifact-desc p{font-size:13.5px;line-height:1.8;color:var(--text);-webkit-text-fill-color:var(--text);}
+.artifact-desc p+p{margin-top:9px;}
+.artifact-desc b{color:var(--gold2);-webkit-text-fill-color:var(--gold2);}
+.target-row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
+.target-chip{flex:1;min-width:130px;border-radius:12px;padding:12px 14px;border:1px solid;}
+.target-chip.red{background:rgba(190,70,60,.12);border-color:rgba(200,90,80,.45);}
+.target-chip.blue{background:rgba(70,110,180,.12);border-color:rgba(90,140,200,.45);}
+.target-chip h5{font-size:12px;margin-bottom:4px;}
+.target-chip.red h5{color:#e89a90;-webkit-text-fill-color:#e89a90;}
+.target-chip.blue h5{color:#9ab8e8;-webkit-text-fill-color:#9ab8e8;}
+.target-chip p{font-size:12px;line-height:1.6;color:var(--text2);-webkit-text-fill-color:var(--text2);}
+
+/* 마무리 씬 */
+#s7{position:relative;min-height:100svh;background:linear-gradient(180deg,var(--bg3) 0%,var(--bg) 100%);overflow:hidden;}
+.side-char{position:absolute;bottom:0;right:-10px;z-index:3;}
+.side-char img{height:68svh;max-height:480px;width:auto;filter:drop-shadow(-8px 0 20px rgba(0,0,0,.6));}
+.final-content{position:relative;z-index:10;padding:56px 20px 40px;width:60%;}
+.s6-bubble{margin-bottom:18px;}
+.next-info{background:rgba(200,168,75,.08);border:1px solid rgba(200,168,75,.22);border-radius:12px;padding:16px;margin-bottom:12px;}
+.next-info h4{font-size:12px;letter-spacing:.18em;color:var(--gold);-webkit-text-fill-color:var(--gold);margin-bottom:6px;text-transform:uppercase;}
+.next-info p{font-size:13px;line-height:1.7;color:var(--text2);-webkit-text-fill-color:var(--text2);}
+
+.nav-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:58px;padding:0 22px;margin-top:14px;border:1px solid rgba(232,204,128,.72);border-radius:14px;background:linear-gradient(135deg,#e8cc80 0%,#c8a84b 100%);color:#15100a!important;-webkit-text-fill-color:#15100a!important;text-decoration:none;font-size:14px;font-weight:800;letter-spacing:.04em;box-shadow:0 12px 28px rgba(200,168,75,.28),0 0 0 1px rgba(255,255,255,.08) inset;transition:transform .18s ease,filter .18s ease;}
+.nav-btn::after{content:'›';font-size:24px;line-height:1;margin-top:-1px;}
+.nav-btn:active{transform:scale(.97);}
+.nav-btn:hover{filter:brightness(1.08);}
+</style>
+</head>
+<body>
+
+<div class="pdots" id="pdots">
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+  <div class="pdot on"></div>
+</div>
+
+<!-- ══ 씬 1: 인트로 ══ -->
+<section class="scene in-view" id="s1">
+  <div class="s1-badge badge">
+    <div class="bl"></div>
+    <div class="bt">Bucheon Bow Museum</div>
+    <div class="bk">부천시 활박물관</div>
+    <div class="bl" style="margin-top:5px;"></div>
+  </div>
+  <div style="flex:1;display:flex;align-items:flex-end;padding:120px 22px 0;width:100%;z-index:20;"></div>
+  <div class="s1-bubble-wrap bubble-wrap">
+    <button class="audio-btn" id="btn-s1" data-label="태용의 인사" onclick="playAudio(&#39;s1&#39;,this)">
+      <span class="btn-icon">🔊</span> 태용의 인사
+    </button>
+    <div class="bubble tail-bl">
+      다시 만났네! 나 <b>태용</b>이야 👋<br>
+      이번엔 조선시대 왕실의 활쏘기 의식,<br>
+      <b>대사례(大射禮)</b>로 안내할게.<br><br>
+      🎯 왕과 신하가 함께한 활쏘기 의식<br>
+      🖼️ 그 장면을 담은 <b>대사례도</b><br><br>
+      스크롤 내리면서 천천히 따라와줘!
+    </div>
+  </div>
+  <div class="intro-char">
+    <img src="file:///C:/Users/USER/Downloads/Tae/hi.png" alt="태용">
+  </div>
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="sh-arrow"></div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬 2: 챕터 타이틀 (음성 없음) ══ -->
+<section class="scene in-view" id="s2">
+  <div class="ch-label">Chapter 03</div>
+  <div class="ch-title">왕실의 활쏘기<br><span>대사례</span></div>
+  <div class="ch-en">Daesarye · Royal Archery Rite</div>
+  <div class="ch-rule"></div>
+  <div class="ch-desc">
+    임금과 신하가 한자리에 모여<br>덕(德)을 닦고 마음을 가다듬던<br>조선 왕실의 활쏘기 의식.
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬 3: 대사례 소개 (카드) ══ -->
+<section class="scene in-view" id="s3">
+  <div class="s3-top-char">
+    <img src="file:///C:/Users/USER/Downloads/Tae/Tae4.png" alt="태용 대사례도 설명">
+  </div>
+  <button class="audio-btn" id="btn-s3" data-label="대사례란?" onclick="playAudio(&#39;s3&#39;,this)" style="margin-top:14px;">
+    <span class="btn-icon">🔊</span> 대사례란?
+  </button>
+  <div class="info-card">
+    <h3>🎯 대사례란?</h3>
+    <p><b>대사례(大射禮)</b>는 조선시대 임금이 성균관에 나아가 신하와 한자리에 모여, 옛 성인에게 제향하고 함께 활을 쏘던 의식이에요.</p>
+    <p>활쏘기는 <b>육예(六藝)</b>의 하나로 덕행을 수양하는 방법이자, 심신을 단련하고 나라의 비상시를 대비하는 훈련으로도 중요한 의미를 가졌어.</p>
+  </div>
+  <div class="info-card">
+    <h3>🖼️ 대사례도</h3>
+    <p>이 의식을 그린 행사 기록화를 <b>대사례도(大射禮圖)</b>라고 해요.</p>
+    <p>행사 순서에 따라 오른쪽부터 세 장면으로 구성돼 있어:</p>
+    <div class="mat-row">
+      <span class="mat-chip">① 어사례도 · 국왕</span>
+      <span class="mat-chip">② 시사례도 · 신하</span>
+      <span class="mat-chip">③ 시사관상벌도 · 상벌</span>
+    </div>
+  </div>
+  <div class="info-card">
+    <h3>🎯 과녁의 차이</h3>
+    <p>어사례도와 시사례도의 가장 큰 차이는 <b>과녁</b>이야.</p>
+    <div class="target-row">
+      <div class="target-chip red">
+        <h5>🐻 웅후 (熊侯)</h5>
+        <p>왕의 과녁. 곰이 그려진 붉은색 과녁.</p>
+      </div>
+      <div class="target-chip blue">
+        <h5>🦌 미후 (麋侯)</h5>
+        <p>신하의 과녁. 사슴이 그려진 푸른색 과녁.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬 4: 어사례도 ══ -->
+<section class="scene artifact-scene in-view" id="s4">
+  <div class="artifact-glow"></div>
+  <div class="artifact-frame">
+    <img src="file:///C:/Users/USER/Downloads/Tae/eosarye.png" alt="어사례도">
+  </div>
+  <div class="artifact-caption">
+    <h2>① 어사례도</h2>
+    <p class="sub">御射禮圖 · The King's Archery</p>
+    <div class="artifact-desc">
+      <p>국왕이 활 쏘는 장면을 그린 그림이야. 왕의 과녁은 곰이 그려진 붉은색 <b>웅후</b>였고, <b>영조</b>는 총 네 발 중 세 발을 명중했대.</p>
+      <p>악차(幄次)에 세 개의 단을 설치했는데, 제1단은 국왕의 <b>어좌</b>, 제2단은 자줏빛 용문석을 깐 <b>어사위(御射位)</b>, 제3단은 종친과 문무백관의 자리였어.</p>
+      <p>단 동쪽 탁자에는 국왕의 깍지·팔찌, 어궁(御弓), 어시(御矢)를 놓았고, 단 아래에는 상으로 줄 <b>표리·궁시</b>와 벌로 줄 단술·잔을 두었어.</p>
+    </div>
+    <button class="audio-btn" id="btn-s4" data-label="어사례도 설명듣기" onclick="playAudio(&#39;s4&#39;,this)" style="margin-top:14px;">
+      <span class="btn-icon">🔊</span> 어사례도 설명듣기
+    </button>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬 5: 시사례도 ══ -->
+<section class="scene artifact-scene in-view" id="s5">
+  <div class="artifact-glow"></div>
+  <div class="artifact-frame">
+    <img src="file:///C:/Users/USER/Downloads/Tae/sisarye.png" alt="시사례도">
+  </div>
+  <div class="artifact-caption">
+    <h2>② 시사례도</h2>
+    <p class="sub">侍射禮圖 · The Officials' Archery</p>
+    <div class="artifact-desc">
+      <p>신하들이 두 명씩 짝을 지어 활 쏘는 모습을 담았어. 어사례도와의 차이는 과녁이 푸른색 <b>미후</b>로 바뀐 점이야.</p>
+      <p>왕이 어사례를 마치고 단 뒤 어좌에 앉아 있고, 시사관 두 명이 화살을 장전하는 모습이지.</p>
+      <p>과녁 주위의 <b>핍</b>에는 적중 여부를 알리는 각색기를 든 관원이 있고, 사단 아래 우측에는 맞힌 화살을 꽂아두는 <b>복(福)</b>이 다섯 개 설치돼 있어.</p>
+    </div>
+    <button class="audio-btn" id="btn-s5" data-label="시사례도 설명듣기" onclick="playAudio(&#39;s5&#39;,this)" style="margin-top:14px;">
+      <span class="btn-icon">🔊</span> 시사례도 설명듣기
+    </button>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬 6: 시사관상벌도 ══ -->
+<section class="scene artifact-scene in-view" id="s6">
+  <div class="artifact-glow"></div>
+  <div class="artifact-frame">
+    <img src="file:///C:/Users/USER/Downloads/Tae/sangbeol.png" alt="시사관상벌도">
+  </div>
+  <div class="artifact-caption">
+    <h2>③ 시사관상벌도</h2>
+    <p class="sub">侍射官賞罰圖 · Rewards and Penalties</p>
+    <div class="artifact-desc">
+      <p>시사를 마친 후 상을 주고 벌주를 내리는 장면이야. 화살을 맞힌 사람은 <b>표리와 궁시</b>를 상으로 받고, 맞히지 못한 사람은 <b>벌주</b>를 마셨어.</p>
+      <p>시사례를 마친 종친과 문무백관이 단 아래 좌우로 줄지어 앉아 있고, 맞힌 자는 무릎 꿇고 국왕이 하사한 상품을 받아.</p>
+      <p>반대편에서는 못 맞힌 자가 국왕이 내린 벌주를 각배에 받아 서쪽을 향해 마시는 모습이 묘사돼 있지.</p>
+    </div>
+    <button class="audio-btn" id="btn-s6" data-label="시사관상벌도 설명듣기" onclick="playAudio(&#39;s6&#39;,this)" style="margin-top:14px;">
+      <span class="btn-icon">🔊</span> 시사관상벌도 설명듣기
+    </button>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬 7: 마무리 ══ -->
+<section class="scene in-view" id="s7">
+  <div class="side-char">
+    <img src="file:///C:/Users/USER/Downloads/Tae/Tae3.png" alt="태용 마무리">
+  </div>
+  <div class="final-content">
+    <div class="s6-bubble">
+      <button class="audio-btn" id="btn-s7" data-label="태용의 인사" onclick="playAudio(&#39;s7&#39;,this)" style="margin-top:0;margin-bottom:6px;">
+        <span class="btn-icon">🔊</span> 태용의 인사
+      </button>
+      <div class="bubble tail-r">
+        대사례 이야기는 여기까지야!<br>
+        활쏘기는 단순한 무예가 아니라<br>
+        <b>덕(德)을 닦는 의식</b>이자<br>
+        왕과 신하가 함께한<br>
+        품격 있는 문화였어 🎯
+      </div>
+    </div>
+    <div class="next-info">
+      <h4>📖 도슨트를 마치며</h4>
+      <p>각궁부터 화살, 그리고 대사례까지 — 우리 전통 활 문화를 함께 둘러봤어. 끝까지 따라와 줘서 고마워!</p>
+    </div>
+    <br>
+    <a class="nav-btn" href="https://hyeyoon0524.github.io/bucheon-bow-museum/Suho_quiz_1_2.html">
+      <span>●</span><span>QUIZ · 수호와 복습하기</span>
+    </a>
+  </div>
+</section>
+
+<script src="./Tae4part_files/gsap.min.js.다운로드"></script>
+<script src="./Tae4part_files/ScrollTrigger.min.js.다운로드"></script>
+<script>
+/* 시온 방식 reveal */
+(()=>{
+  const scenes=[...document.querySelectorAll('.scene')];
+  function setDot(i){document.querySelectorAll('.pdot').forEach((d,j)=>d.classList.toggle('on',i===j));}
+  function reveal(s){if(s)s.classList.add('in-view');}
+  function checkScenes(){
+    const mid=window.innerHeight*.52;let active=0;
+    scenes.forEach((scene,i)=>{
+      const r=scene.getBoundingClientRect();
+      if(r.top<window.innerHeight*.86&&r.bottom>window.innerHeight*.14)reveal(scene);
+      if(r.top<=mid&&r.bottom>=mid)active=i;
+    });
+    setDot(active);
+  }
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting)reveal(e.target);});checkScenes();
+  },{threshold:.12,rootMargin:'0px 0px -3% 0px'});
+  scenes.forEach(s=>observer.observe(s));
+  let ticking=false;
+  window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{checkScenes();ticking=false;});ticking=true;}},{passive:true});
+  window.addEventListener('resize',checkScenes);
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',checkScenes,{once:true});}
+  else{requestAnimationFrame(checkScenes);}
+  setInterval(checkScenes,250);
+})();
+
+/* 오디오 (파일은 나중에 audio 폴더에 추가) */
+const audioFiles={
+  s1:'audio/d1_intro.mp3',
+  s3:'audio/d3_about.mp3',
+  s4:'audio/d4_eosarye.mp3',
+  s5:'audio/d5_sisarye.mp3',
+  s6:'audio/d6_reward.mp3',
+  s7:'audio/d7_ending.mp3',
+};
+
+let currentAudio=null;
+let currentBtn=null;
+
+function playAudio(key, btn){
+  const label = btn.getAttribute('data-label') || '태용 목소리 듣기';
+  if(currentAudio && !currentAudio.paused){
+    currentAudio.pause();
+    currentAudio.currentTime=0;
+    if(currentBtn){
+      currentBtn.classList.remove('playing');
+      currentBtn.innerHTML='<span class="btn-icon">🔊</span> '+currentBtn.getAttribute('data-label');
+    }
+    if(currentBtn===btn){currentAudio=null;currentBtn=null;return;}
+  }
+  const audio=new Audio(audioFiles[key]);
+  currentAudio=audio;
+  currentBtn=btn;
+  btn.classList.add('playing');
+  btn.innerHTML='<span class="btn-icon">⏸</span> 재생 중...';
+  audio.play().catch(()=>{
+    btn.classList.remove('playing');
+    btn.innerHTML='<span class="btn-icon">🔊</span> '+label;
+    currentAudio=null;currentBtn=null;
+  });
+  audio.addEventListener('ended',()=>{
+    btn.classList.remove('playing');
+    btn.innerHTML='<span class="btn-icon">🔊</span> '+label;
+    currentAudio=null;currentBtn=null;
+  });
+}
+</script>
+</body></html>
