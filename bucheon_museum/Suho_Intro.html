@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0044)file:///C:/Users/USER/Downloads/intro_1.html -->
+<!-- saved from url=(0044)file:///C:/Users/USER/Downloads/intro_2.html -->
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>부천시 활박물관 — 입장 도슨트</title>
@@ -78,20 +78,11 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 /* 씬1 인트로 */
 #s1{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;background:radial-gradient(ellipse 90% 60% at 50% 100%,rgba(180,140,50,.1) 0%,transparent 70%),linear-gradient(180deg,#08080f 0%,var(--bg) 100%);}
 .s1-badge{position:absolute;top:24px;left:0;right:0;display:flex;justify-content:center;z-index:10;}
-.s1-logo{width:auto;height:200px;max-width:80vw;object-fit:contain;
-  filter:drop-shadow(0 0 18px rgba(200,168,75,.35));
-  animation:logoFloat 5.5s ease-in-out infinite, logoGlow 3.2s ease-in-out infinite;
-  transform-origin:center center;}
 @keyframes logoFloat{
-  0%{transform:translateY(0) rotate(-2.2deg);}
-  50%{transform:translateY(-10px) rotate(2.2deg);}
-  100%{transform:translateY(0) rotate(-2.2deg);}
+  0%{transform:translateY(0) rotate(-1.6deg);}
+  50%{transform:translateY(-8px) rotate(1.6deg);}
+  100%{transform:translateY(0) rotate(-1.6deg);}
 }
-@keyframes logoGlow{
-  0%,100%{filter:drop-shadow(0 0 14px rgba(200,168,75,.28)) brightness(1);}
-  50%{filter:drop-shadow(0 0 26px rgba(240,223,160,.6)) brightness(1.12);}
-}
-@media (prefers-reduced-motion:reduce){.s1-logo{animation:none;}}
 .s1-bubble-wrap{width:100%;padding:0 22px;z-index:20;}
 .intro-char{z-index:10;display:flex;justify-content:center;margin-top:-20px;}
 .intro-char img{height:340px;width:auto;max-width:94vw;object-fit:contain;filter:drop-shadow(0 6px 24px rgba(0,0,0,.7));}
@@ -118,6 +109,9 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 .info-card p{font-size:14px;line-height:1.85;color:var(--text);-webkit-text-fill-color:var(--text);}
 .info-card p+p{margin-top:9px;}
 .info-card p b{color:var(--gold2);-webkit-text-fill-color:var(--gold2);}
+.museum-photo{max-width:560px;width:100%;margin-bottom:14px;border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,.45);opacity:0;transition:opacity .72s ease,transform .72s cubic-bezier(.2,.8,.2,1);transform:translateY(24px);}
+.museum-photo img{width:100%;display:block;}
+.scene.in-view .museum-photo{opacity:1;transform:translateY(0);transition-delay:.06s;}
 
 /* 씬4 전시 구역 */
 #s4{display:flex;flex-direction:column;align-items:center;padding:56px 20px;background:var(--bg2);}
@@ -184,13 +178,12 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 
 /* 로고 스플래시 (맨 위 풀스크린) */
 #s0{display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:#000;position:relative;}
-.splash-logo{width:auto;height:62svh;max-height:760px;max-width:92vw;object-fit:contain;
-  animation:logoFloat 5.5s ease-in-out infinite, logoGlow 3.2s ease-in-out infinite;
-  transform-origin:center center;}
+  background:#000;position:relative;padding:0;}
+.splash-logo{width:100%;height:100%;max-width:100vw;max-height:100svh;object-fit:contain;
+  animation:logoFloat 6s ease-in-out infinite;transform-origin:center center;}
 /* 아래쪽으로 그라데이션 페이드 (검정 → 인트로 배경) */
-#s0::after{content:'';position:absolute;left:0;right:0;bottom:0;height:30%;
-  background:linear-gradient(180deg,transparent 0%,var(--bg) 100%);pointer-events:none;}
+#s0::after{content:'';position:absolute;left:0;right:0;bottom:0;height:22%;
+  background:linear-gradient(180deg,transparent 0%,#000 100%);pointer-events:none;}
 .splash-scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
   z-index:5;display:flex;flex-direction:column;align-items:center;gap:6px;
   animation:fadeInOut 2.6s ease-in-out infinite;}
@@ -198,11 +191,24 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 .splash-scroll .sh-arrow{width:16px;height:16px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);}
 @keyframes fadeInOut{0%,100%{opacity:.4;}50%{opacity:1;}}
 @media (prefers-reduced-motion:reduce){.splash-logo{animation:none;}}
+
+/* 배경음악 토글 버튼 */
+#bgm-toggle{position:fixed;top:16px;right:14px;z-index:9999;
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(20,16,28,.78);border:1px solid rgba(200,168,75,.4);
+  color:var(--gold2);-webkit-text-fill-color:var(--gold2);
+  font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 14px rgba(0,0,0,.5);backdrop-filter:blur(4px);transition:all .2s;}
+#bgm-toggle:hover{background:rgba(40,32,52,.9);border-color:var(--gold2);}
+#bgm-toggle:active{transform:scale(.92);}
 </style>
 </head>
 <body>
 
-<div id="gold-dust"><div class="dust" style="width: 4.12293px; height: 4.12293px; left: 50.0285vw; --drift: 44.14830174153512px; animation-duration: 12.9947s; animation-delay: 8.43948s;"></div><div class="dust" style="width: 1.56px; height: 1.56px; left: 9.14047vw; --drift: 1.9200548831713036px; animation-duration: 7.82828s; animation-delay: 6.71506s;"></div><div class="dust" style="width: 5.48411px; height: 5.48411px; left: 46.4203vw; --drift: -46.301920513774746px; animation-duration: 13.1356s; animation-delay: 6.34844s;"></div><div class="dust" style="width: 2.39907px; height: 2.39907px; left: 16.8143vw; --drift: 33.92328987627086px; animation-duration: 12.0158s; animation-delay: 10.3003s;"></div><div class="dust" style="width: 4.66184px; height: 4.66184px; left: 50.036vw; --drift: 42.29012285448039px; animation-duration: 9.64438s; animation-delay: 4.16494s;"></div><div class="dust" style="width: 1.52737px; height: 1.52737px; left: 81.9892vw; --drift: -4.3356839413052555px; animation-duration: 9.71599s; animation-delay: 6.72132s;"></div><div class="dust" style="width: 4.0601px; height: 4.0601px; left: 68.0778vw; --drift: 23.35759032497674px; animation-duration: 11.4214s; animation-delay: 1.43613s;"></div><div class="dust" style="width: 3.58884px; height: 3.58884px; left: 9.23812vw; --drift: 10.865321448140733px; animation-duration: 10.6494s; animation-delay: 9.12989s;"></div><div class="dust" style="width: 3.28647px; height: 3.28647px; left: 9.81967vw; --drift: -32.131459102033176px; animation-duration: 7.23315s; animation-delay: 5.74711s;"></div><div class="dust" style="width: 5.18643px; height: 5.18643px; left: 90.0268vw; --drift: 0.7266216536216845px; animation-duration: 10.3332s; animation-delay: 3.13502s;"></div><div class="dust" style="width: 4.40228px; height: 4.40228px; left: 65.1904vw; --drift: -24.518735031471785px; animation-duration: 8.57904s; animation-delay: 2.81565s;"></div><div class="dust" style="width: 2.37491px; height: 2.37491px; left: 94.8915vw; --drift: -42.10808589531847px; animation-duration: 9.71032s; animation-delay: 1.08468s;"></div><div class="dust" style="width: 2.28796px; height: 2.28796px; left: 33.5629vw; --drift: 43.13592504418092px; animation-duration: 14.6505s; animation-delay: 6.23835s;"></div><div class="dust" style="width: 4.89745px; height: 4.89745px; left: 14.4437vw; --drift: 8.489946535949272px; animation-duration: 10.6486s; animation-delay: 1.56478s;"></div><div class="dust" style="width: 5.01246px; height: 5.01246px; left: 31.097vw; --drift: -41.69263396094448px; animation-duration: 13.7079s; animation-delay: 11.9196s;"></div><div class="dust" style="width: 4.20171px; height: 4.20171px; left: 76.5643vw; --drift: -33.247098437640595px; animation-duration: 9.54171s; animation-delay: 9.07177s;"></div><div class="dust" style="width: 3.57227px; height: 3.57227px; left: 83.0905vw; --drift: -28.81337712827797px; animation-duration: 7.32744s; animation-delay: 5.61624s;"></div><div class="dust" style="width: 1.91088px; height: 1.91088px; left: 4.65646vw; --drift: -34.23935280112543px; animation-duration: 9.42699s; animation-delay: 4.75666s;"></div><div class="dust" style="width: 4.8041px; height: 4.8041px; left: 84.2944vw; --drift: -2.1137920899257168px; animation-duration: 11.5364s; animation-delay: 3.25195s;"></div><div class="dust" style="width: 3.04517px; height: 3.04517px; left: 15.4689vw; --drift: -49.59562278374172px; animation-duration: 12.3009s; animation-delay: 3.88607s;"></div><div class="dust" style="width: 1.88223px; height: 1.88223px; left: 47.6307vw; --drift: 15.40936591488827px; animation-duration: 13.6447s; animation-delay: 12.4009s;"></div><div class="dust" style="width: 5.40482px; height: 5.40482px; left: 89.4024vw; --drift: -17.445808957087323px; animation-duration: 8.8196s; animation-delay: 2.43708s;"></div><div class="dust" style="width: 2.89188px; height: 2.89188px; left: 89.9104vw; --drift: 4.752518483108275px; animation-duration: 9.40722s; animation-delay: 4.5633s;"></div><div class="dust" style="width: 3.75172px; height: 3.75172px; left: 39.5084vw; --drift: 38.99235249326762px; animation-duration: 13.3716s; animation-delay: 7.18611s;"></div><div class="dust" style="width: 3.47109px; height: 3.47109px; left: 31.5918vw; --drift: -3.5467151389503755px; animation-duration: 14.2394s; animation-delay: 11.8786s;"></div><div class="dust" style="width: 2.53219px; height: 2.53219px; left: 43.9673vw; --drift: 16.886053695983335px; animation-duration: 9.0619s; animation-delay: 7.4108s;"></div><div class="dust" style="width: 2.4082px; height: 2.4082px; left: 5.85494vw; --drift: -45.8832183058765px; animation-duration: 12.7847s; animation-delay: 1.36813s;"></div><div class="dust" style="width: 2.8095px; height: 2.8095px; left: 24.6673vw; --drift: 36.58948116644213px; animation-duration: 9.04041s; animation-delay: 0.679582s;"></div><div class="dust" style="width: 2.91281px; height: 2.91281px; left: 49.8541vw; --drift: 5.773481455073153px; animation-duration: 13.8141s; animation-delay: 9.48265s;"></div><div class="dust" style="width: 1.53763px; height: 1.53763px; left: 67.4258vw; --drift: -42.810495372947265px; animation-duration: 13.1415s; animation-delay: 8.25968s;"></div><div class="dust" style="width: 2.1899px; height: 2.1899px; left: 86.4031vw; --drift: 13.552523770004612px; animation-duration: 11.4116s; animation-delay: 8.95741s;"></div><div class="dust" style="width: 2.57152px; height: 2.57152px; left: 43.1777vw; --drift: -44.145281445469px; animation-duration: 12.3989s; animation-delay: 11.8052s;"></div><div class="dust" style="width: 1.59471px; height: 1.59471px; left: 24.0925vw; --drift: -16.59291257991213px; animation-duration: 11.1949s; animation-delay: 4.58244s;"></div><div class="dust" style="width: 1.52878px; height: 1.52878px; left: 61.3387vw; --drift: -20.817987192894492px; animation-duration: 7.475s; animation-delay: 2.07667s;"></div><div class="dust" style="width: 5.43921px; height: 5.43921px; left: 1.95074vw; --drift: -41.30430361265461px; animation-duration: 9.30796s; animation-delay: 3.67898s;"></div><div class="dust" style="width: 5.07037px; height: 5.07037px; left: 23.4824vw; --drift: -6.304149792970215px; animation-duration: 10.8346s; animation-delay: 6.9949s;"></div><div class="dust" style="width: 5.15707px; height: 5.15707px; left: 18.1795vw; --drift: 14.192982885691123px; animation-duration: 12.0586s; animation-delay: 8.37498s;"></div><div class="dust" style="width: 3.05623px; height: 3.05623px; left: 73.1776vw; --drift: 45.63240711277338px; animation-duration: 13.0277s; animation-delay: 7.02947s;"></div><div class="dust" style="width: 4.70735px; height: 4.70735px; left: 17.6471vw; --drift: 57.47307579178016px; animation-duration: 13.0512s; animation-delay: 9.45318s;"></div><div class="dust" style="width: 2.15363px; height: 2.15363px; left: 40.93vw; --drift: 47.83364516479686px; animation-duration: 11.5573s; animation-delay: 3.83785s;"></div><div class="dust" style="width: 2.53361px; height: 2.53361px; left: 60.5216vw; --drift: -33.74473376769593px; animation-duration: 8.00673s; animation-delay: 2.67904s;"></div><div class="dust" style="width: 4.92281px; height: 4.92281px; left: 20.8172vw; --drift: 22.965360959702565px; animation-duration: 9.01035s; animation-delay: 5.05558s;"></div><div class="dust" style="width: 3.44384px; height: 3.44384px; left: 81.2733vw; --drift: 28.51412735125821px; animation-duration: 10.8109s; animation-delay: 6.28659s;"></div><div class="dust" style="width: 3.17649px; height: 3.17649px; left: 58.7443vw; --drift: -38.67339118296246px; animation-duration: 13.9884s; animation-delay: 12.8165s;"></div><div class="dust" style="width: 5.31811px; height: 5.31811px; left: 30.2515vw; --drift: -1.8866987402146833px; animation-duration: 12.3807s; animation-delay: 9.42424s;"></div></div>
+<audio id="bgm" src="suho/bgm.mp3" loop="" preload="auto"></audio>
+<button id="bgm-toggle" aria-label="배경음악 켜기/끄기">🎵</button>
+
+<div id="gold-dust"><div class="dust" style="width: 1.53529px; height: 1.53529px; left: 22.0657vw; --drift: -50.920791950819805px; animation-duration: 14.8692s; animation-delay: 9.31161s;"></div><div class="dust" style="width: 3.00854px; height: 3.00854px; left: 40.5841vw; --drift: 6.610487051575717px; animation-duration: 10.715s; animation-delay: 4.67042s;"></div><div class="dust" style="width: 4.65163px; height: 4.65163px; left: 89.344vw; --drift: -45.14908763896318px; animation-duration: 12.3176s; animation-delay: 4.686s;"></div><div class="dust" style="width: 2.52342px; height: 2.52342px; left: 34.4013vw; --drift: 33.474738238691444px; animation-duration: 13.6616s; animation-delay: 8.0314s;"></div><div class="dust" style="width: 3.94038px; height: 3.94038px; left: 27.3905vw; --drift: 3.0269861673131047px; animation-duration: 12.848s; animation-delay: 4.34648s;"></div><div class="dust" style="width: 4.0512px; height: 4.0512px; left: 93.6475vw; --drift: 42.36542087337088px; animation-duration: 7.26819s; animation-delay: 6.76846s;"></div><div class="dust" style="width: 2.76046px; height: 2.76046px; left: 33.0875vw; --drift: -37.22576841192533px; animation-duration: 9.96087s; animation-delay: 2.23039s;"></div><div class="dust" style="width: 3.11834px; height: 3.11834px; left: 23.0504vw; --drift: -48.15659130781235px; animation-duration: 10.9809s; animation-delay: 9.33792s;"></div><div class="dust" style="width: 3.12709px; height: 3.12709px; left: 31.4021vw; --drift: 14.760069673147825px; animation-duration: 9.6384s; animation-delay: 4.0769s;"></div><div class="dust" style="width: 4.08464px; height: 4.08464px; left: 33.1659vw; --drift: -31.950325124021038px; animation-duration: 8.676s; animation-delay: 8.58694s;"></div><div class="dust" style="width: 1.92163px; height: 1.92163px; left: 44.5368vw; --drift: 19.35262898409644px; animation-duration: 9.51183s; animation-delay: 3.98565s;"></div><div class="dust" style="width: 2.80462px; height: 2.80462px; left: 22.0922vw; --drift: 11.700479471153344px; animation-duration: 8.05689s; animation-delay: 4.73121s;"></div><div class="dust" style="width: 3.9217px; height: 3.9217px; left: 63.733vw; --drift: -25.20014415777414px; animation-duration: 12.8527s; animation-delay: 8.85623s;"></div><div class="dust" style="width: 4.02273px; height: 4.02273px; left: 12.7731vw; --drift: 40.447402989992526px; animation-duration: 13.8481s; animation-delay: 12.8639s;"></div><div class="dust" style="width: 5.17467px; height: 5.17467px; left: 67.1561vw; --drift: 11.997328205865287px; animation-duration: 12.4451s; animation-delay: 5.53238s;"></div><div class="dust" style="width: 1.70046px; height: 1.70046px; left: 12.4707vw; --drift: 39.664424550962806px; animation-duration: 11.8991s; animation-delay: 5.45277s;"></div><div class="dust" style="width: 2.69019px; height: 2.69019px; left: 77.4413vw; --drift: 38.299832485852605px; animation-duration: 7.1948s; animation-delay: 7.06353s;"></div><div class="dust" style="width: 3.69003px; height: 3.69003px; left: 30.3662vw; --drift: 34.240029167099266px; animation-duration: 12.6529s; animation-delay: 6.70972s;"></div><div class="dust" style="width: 4.31676px; height: 4.31676px; left: 78.4761vw; --drift: -34.959592363506225px; animation-duration: 13.7825s; animation-delay: 2.10234s;"></div><div class="dust" style="width: 2.8123px; height: 2.8123px; left: 87.9208vw; --drift: 47.759358572324075px; animation-duration: 14.7664s; animation-delay: 5.53338s;"></div><div class="dust" style="width: 4.7594px; height: 4.7594px; left: 79.9331vw; --drift: -26.11083463190002px; animation-duration: 14.3664s; animation-delay: 10.6338s;"></div><div class="dust" style="width: 2.00321px; height: 2.00321px; left: 57.523vw; --drift: -16.94634806343999px; animation-duration: 10.2583s; animation-delay: 5.12099s;"></div><div class="dust" style="width: 3.04153px; height: 3.04153px; left: 33.4693vw; --drift: -7.91279575915005px; animation-duration: 14.2084s; animation-delay: 4.0703s;"></div><div class="dust" style="width: 4.90574px; height: 4.90574px; left: 13.2299vw; --drift: 19.15532665626185px; animation-duration: 8.8582s; animation-delay: 4.63983s;"></div><div class="dust" style="width: 3.56082px; height: 3.56082px; left: 63.0645vw; --drift: -23.677503171983773px; animation-duration: 8.43886s; animation-delay: 2.47596s;"></div><div class="dust" style="width: 2.85519px; height: 2.85519px; left: 13.6704vw; --drift: 25.008428296795344px; animation-duration: 13.5506s; animation-delay: 13.1301s;"></div><div class="dust" style="width: 1.58033px; height: 1.58033px; left: 44.1071vw; --drift: -14.200388241469902px; animation-duration: 11.0165s; animation-delay: 8.47438s;"></div><div class="dust" style="width: 5.42012px; height: 5.42012px; left: 54.4961vw; --drift: 58.95796458319397px; animation-duration: 13.64s; animation-delay: 2.6493s;"></div><div class="dust" style="width: 2.6367px; height: 2.6367px; left: 3.59851vw; --drift: -56.6740782598539px; animation-duration: 14.7616s; animation-delay: 5.3836s;"></div><div class="dust" style="width: 4.94531px; height: 4.94531px; left: 11.5156vw; --drift: -14.885471643787668px; animation-duration: 12.7955s; animation-delay: 6.38439s;"></div><div class="dust" style="width: 2.89758px; height: 2.89758px; left: 39.6958vw; --drift: 32.529075543281536px; animation-duration: 11.227s; animation-delay: 11.058s;"></div><div class="dust" style="width: 2.39981px; height: 2.39981px; left: 33.844vw; --drift: -45.92629914941841px; animation-duration: 13.1039s; animation-delay: 1.73344s;"></div><div class="dust" style="width: 4.30456px; height: 4.30456px; left: 49.0365vw; --drift: 24.859627727883435px; animation-duration: 10.034s; animation-delay: 5.33691s;"></div><div class="dust" style="width: 3.78689px; height: 3.78689px; left: 3.03129vw; --drift: 27.940138929214115px; animation-duration: 8.99617s; animation-delay: 2.64269s;"></div><div class="dust" style="width: 5.28342px; height: 5.28342px; left: 26.5437vw; --drift: 14.822555007100902px; animation-duration: 8.9601s; animation-delay: 2.4319s;"></div><div class="dust" style="width: 2.5453px; height: 2.5453px; left: 18.6758vw; --drift: 59.45143538564028px; animation-duration: 11.1232s; animation-delay: 3.99712s;"></div><div class="dust" style="width: 4.25769px; height: 4.25769px; left: 80.3514vw; --drift: -33.42924554748604px; animation-duration: 10.3274s; animation-delay: 7.5109s;"></div><div class="dust" style="width: 5.08454px; height: 5.08454px; left: 41.8788vw; --drift: -1.7387440890774144px; animation-duration: 11.5802s; animation-delay: 0.953798s;"></div><div class="dust" style="width: 1.90578px; height: 1.90578px; left: 25.6846vw; --drift: -57.670871810250276px; animation-duration: 11.9846s; animation-delay: 3.89078s;"></div><div class="dust" style="width: 5.39628px; height: 5.39628px; left: 6.47592vw; --drift: 54.53323072542294px; animation-duration: 8.48836s; animation-delay: 0.628389s;"></div><div class="dust" style="width: 4.11926px; height: 4.11926px; left: 24.227vw; --drift: -41.71413734778544px; animation-duration: 10.1477s; animation-delay: 0.0127324s;"></div><div class="dust" style="width: 5.37278px; height: 5.37278px; left: 58.8858vw; --drift: -8.888600150964969px; animation-duration: 8.89993s; animation-delay: 6.43356s;"></div><div class="dust" style="width: 2.75687px; height: 2.75687px; left: 94.615vw; --drift: -50.44799730558685px; animation-duration: 10.5428s; animation-delay: 10.4398s;"></div><div class="dust" style="width: 3.16228px; height: 3.16228px; left: 84.1972vw; --drift: 21.818786444669826px; animation-duration: 10.052s; animation-delay: 8.20281s;"></div><div class="dust" style="width: 4.88217px; height: 4.88217px; left: 28.7469vw; --drift: -5.224013092602107px; animation-duration: 10.3641s; animation-delay: 7.47668s;"></div></div>
 
 <div class="pdots" id="pdots">
   <div class="pdot on"></div>
@@ -216,7 +222,7 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 
 <!-- ══ 씬0: 로고 스플래시 ══ -->
 <section class="scene in-view" id="s0">
-  <img class="splash-logo" src="Suho/logo.png" alt="버려진 활의 영혼들이 나에게 고백해왔다">
+  <img class="splash-logo" src="file:///C:/Users/USER/Downloads/suho/logo.png" alt="버려진 활의 영혼들이 나에게 고백해왔다">
   <div class="splash-scroll">
     <span>SCROLL</span>
     <div class="sh-arrow"></div>
@@ -226,7 +232,7 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 <div class="section-rule"></div>
 
 <!-- ══ 씬1: 인트로 ══ -->
-<section class="scene in-view" id="s1">
+<section class="scene" id="s1">
   <div style="flex:1;display:flex;align-items:flex-end;padding:90px 22px 0;width:100%;z-index:20;"></div>
   <div class="s1-bubble-wrap bubble-wrap">
     <button class="audio-btn" id="btn-s1" data-label="수호의 인사" onclick="playAudio(&#39;s1&#39;,this)">
@@ -243,7 +249,7 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
     </div>
   </div>
   <div class="intro-char">
-    <img src="Suho/suho.png" alt="수호">
+    <img src="file:///C:/Users/USER/Downloads/suho/suho.png" alt="수호">
   </div>
   <div class="scroll-hint">
     <span>SCROLL</span>
@@ -254,7 +260,7 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 <div class="section-rule"></div>
 
 <!-- ══ 씬2: 타이틀 ══ -->
-<section class="scene in-view" id="s2">
+<section class="scene" id="s2">
   <div class="ch-label">Prologue</div>
   <div class="ch-title">잊혀진 영웅들,<br><span>망각의 저주</span></div>
   <div class="ch-en">The Sealed Souls · Bucheon Bow Museum</div>
@@ -267,29 +273,37 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 <div class="section-rule"></div>
 
 <!-- ══ 씬3: 박물관 소개 ══ -->
-<section class="scene in-view" id="s3">
+<section class="scene" id="s3">
   <div class="s3-top-char">
-    <img src="Suho/suho2.png" alt="수호 설명">
+    <img src="file:///C:/Users/USER/Downloads/suho/suho2.png" alt="수호 설명">
   </div>
   <button class="audio-btn" id="btn-s3" data-label="박물관 소개" onclick="playAudio(&#39;s3&#39;,this)" style="margin-top:14px;margin-bottom:4px;">
     <span class="btn-icon">🔊</span> 박물관 소개
   </button>
-  <div class="info-card">
-    <h3>🏛️ 우리가 잠든 곳</h3>
-    <p>이곳은 <b>부천시 활박물관</b>. 우리의 영혼이 깃든 활들이 조각난 채 유물로 안치된 곳이다.</p>
-    <p>전시실에는 대표적 활인 <b>각궁</b>을 비롯해 <b>명적·유엽전</b> 등 시대별 활과 화살, 근대 무기인 <b>신기전기·총통</b>까지 <b>100여 점</b>이 잠들어 있다.</p>
+  <div class="museum-photo">
+    <img src="file:///C:/Users/USER/Downloads/suho/museum.png" alt="부천활박물관 전시실">
   </div>
   <div class="info-card">
-    <h3>💫 조각난 영혼들</h3>
-    <p>왕조가 끝나며 우리의 이름은 역사 속으로 사라졌고, 영혼이 깃든 활은 산산이 흩어졌다.</p>
-    <p>그대가 전시를 둘러보며 우리를 <b>기억</b>해줄 때마다, 흩어진 <b>'사랑의 구슬'</b>이 조금씩 모여든다.</p>
+    <h3>🏛️ 우리가 잠든 곳</h3>
+    <p>이곳은 <b>부천활박물관</b>. 우리의 영혼이 깃든 활들이 유물로 안치된 곳이다.</p>
+    <p>우리나라 전통 활을 보존하고 문화유산으로서의 중요성을 알리기 위해 <b>2004년</b> 문을 열었다.</p>
+  </div>
+  <div class="info-card">
+    <h3>🏹 500여 점의 활</h3>
+    <p>국가무형문화재 제47호 궁시장 <b>故 김장환 선생</b>의 국궁 유품 <b>240점</b>을 비롯해, 약 <b>500여 점</b>의 활 관련 자료를 소장하고 있다.</p>
+    <p>고대부터 현대에 이르는 활과 화살, 활쏘기 도구와 기록물까지 — 우리나라 활의 역사를 한눈에 살펴볼 수 있다.</p>
+  </div>
+  <div class="info-card">
+    <h3>💫 명맥을 잇는 곳</h3>
+    <p>전시뿐 아니라 인문학 강좌와 다양한 교육·체험을 통해, 유구한 역사를 간직한 <b>국궁 제작과 궁도의 명맥</b>을 잇는 전문박물관이다.</p>
+    <p>그대가 우리를 <b>기억</b>해줄 때마다, 흩어진 <b>'사랑의 구슬'</b>이 조금씩 모여든다.</p>
   </div>
 </section>
 
 <div class="section-rule"></div>
 
 <!-- ══ 씬4: 전시 구역 안내 ══ -->
-<section class="scene in-view" id="s4">
+<section class="scene" id="s4">
   <div class="zone-head">
     <h2>🗺️ 전시 구역 안내</h2>
     <p>활박물관은 여섯 개의 구역으로 이루어져 있다.<br>순서대로 둘러보면 더욱 좋으니라.</p>
@@ -334,7 +348,7 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 <div class="section-rule"></div>
 
 <!-- ══ 씬5: 도슨트 가이드 소개 ══ -->
-<section class="scene in-view" id="s5">
+<section class="scene" id="s5">
   <div class="guide-head">
     <h2>🎧 그대의 길잡이들</h2>
     <p>전시를 둘러보는 동안,<br>세 길잡이가 차례로 그대를 도울 것이다.</p>
@@ -373,7 +387,7 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
 <!-- ══ 씬6: 마무리 ══ -->
 <section class="scene" id="s6">
   <div class="s6-char">
-    <img src="Suho/Suho_enter_last.png" alt="수호">
+    <img src="file:///C:/Users/USER/Downloads/suho/Suho_enter_last.png" alt="수호">
   </div>
   <div class="final-content">
     <div class="s6-bubble">
@@ -405,8 +419,8 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
   </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js?v=1.1"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js?v=1.1"></script>
+<script src="./Suho_Intro_files/gsap.min.js.다운로드"></script>
+<script src="./Suho_Intro_files/ScrollTrigger.min.js.다운로드"></script>
 <script>
 (()=>{
   const scenes=[...document.querySelectorAll('.scene')];
@@ -453,6 +467,30 @@ body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;o
   }
 })();
 
+/* 배경음악 */
+(()=>{
+  const bgm=document.getElementById('bgm');
+  const toggle=document.getElementById('bgm-toggle');
+  if(!bgm||!toggle)return;
+  bgm.volume=0.35;
+  let playing=false;
+  function tryPlay(){
+    if(playing)return;
+    bgm.play().then(()=>{playing=true;toggle.textContent='🎵';}).catch(()=>{});
+  }
+  // 자동재생 시도 (브라우저 정책상 막히면 첫 터치/클릭에 재생)
+  tryPlay();
+  ['click','touchstart','scroll','keydown'].forEach(ev=>{
+    window.addEventListener(ev,tryPlay,{once:true,passive:true});
+  });
+  // 토글 버튼
+  toggle.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    if(bgm.paused){bgm.play().then(()=>{playing=true;toggle.textContent='🎵';}).catch(()=>{});}
+    else{bgm.pause();playing=false;toggle.textContent='🔇';}
+  });
+})();
+
 /* 오디오 (파일은 나중에 audio 폴더에 추가) */
 const audioFiles={
   s1:'audio/in1_intro.mp3',
@@ -472,17 +510,21 @@ function playAudio(key, btn){
   }
   const audio=new Audio(audioFiles[key]);
   currentAudio=audio;currentBtn=btn;
+  const bgm=document.getElementById('bgm');
+  if(bgm&&!bgm.paused)bgm.volume=0.12;
   btn.classList.add('playing');
   btn.innerHTML='<span class="btn-icon">⏸</span> 재생 중...';
   audio.play().catch(()=>{
     btn.classList.remove('playing');
     btn.innerHTML='<span class="btn-icon">🔊</span> '+label;
     currentAudio=null;currentBtn=null;
+    if(bgm&&!bgm.paused)bgm.volume=0.35;
   });
   audio.addEventListener('ended',()=>{
     btn.classList.remove('playing');
     btn.innerHTML='<span class="btn-icon">🔊</span> '+label;
     currentAudio=null;currentBtn=null;
+    if(bgm&&!bgm.paused)bgm.volume=0.35;
   });
 }
 </script>
