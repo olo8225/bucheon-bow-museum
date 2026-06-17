@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)file:///C:/Users/USER/Downloads/Suho_Outro.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>부천시 활박물관 — 마지막 도슨트</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  color-scheme:only dark;
+  --gold:#c8a84b;--gold2:#e8cc80;
+  --text:#ede8dc;--text2:#9a8f7a;
+  --bline:rgba(180,150,90,.4);
+  --pink:#f5c6d8;--pink2:#e8a5c0;--pink3:#ffd6c4;
+}
+html,body{background:#000!important;color:var(--text)!important;-webkit-text-fill-color:var(--text);}
+body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;overflow-x:hidden;}
+
+.scene{width:100%;min-height:100svh;position:relative;overflow:hidden;}
+
+.bubble{background:rgba(20,16,28,.85);border:1.5px solid var(--bline);border-radius:18px;padding:18px 20px;font-size:15px;line-height:1.85;color:var(--text);-webkit-text-fill-color:var(--text);box-shadow:0 6px 24px rgba(0,0,0,.55);backdrop-filter:blur(4px);text-align:center;}
+.bubble b{color:var(--gold2);-webkit-text-fill-color:var(--gold2);font-weight:600;}
+.bubble em{color:#f0c8a0;-webkit-text-fill-color:#f0c8a0;font-style:normal;}
+
+.pdots{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:999;display:flex;flex-direction:column;gap:7px;}
+.pdot{width:5px;height:5px;border-radius:3px;background:rgba(200,168,75,.25);transition:all .3s;}
+.pdot.on{height:18px;background:var(--gold);}
+
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .85s ease, transform .85s cubic-bezier(.2,.8,.2,1);}
+.scene.in-view .fade-up{opacity:1;transform:translateY(0);}
+.fade-up.d1{transition-delay:.1s;}
+.fade-up.d2{transition-delay:.22s;}
+.fade-up.d3{transition-delay:.34s;}
+.fade-up.d4{transition-delay:.46s;}
+.fade-up.d5{transition-delay:.58s;}
+
+.audio-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(232,204,128,.45);border-radius:30px;padding:9px 18px;font-size:13px;color:var(--gold2);-webkit-text-fill-color:var(--gold2);cursor:pointer;transition:all .2s;letter-spacing:.08em;font-family:inherit;-webkit-appearance:none;appearance:none;}
+.audio-btn:hover{background:rgba(232,204,128,.18);}
+.audio-btn:active{transform:scale(.96);}
+.audio-btn.playing{background:rgba(232,204,128,.2);border-color:var(--gold2);animation:btnPulse 1.5s infinite;}
+@keyframes btnPulse{0%,100%{box-shadow:0 0 0 0 rgba(232,204,128,.35);}50%{box-shadow:0 0 0 8px rgba(232,204,128,0);}}
+.audio-btn .btn-icon{font-size:15px;}
+
+/* 씬0 로고 (검정) */
+#s0{display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;padding:0;}
+.splash-logo{width:100%;height:100%;max-width:100vw;max-height:100svh;object-fit:contain;animation:logoFloat 6s ease-in-out infinite;transform-origin:center center;}
+@keyframes logoFloat{0%{transform:translateY(0) rotate(-1.4deg);}50%{transform:translateY(-8px) rotate(1.4deg);}100%{transform:translateY(0) rotate(-1.4deg);}}
+#s0::after{content:'';position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,transparent 0%,#000 100%);pointer-events:none;}
+.splash-epilogue{position:absolute;top:7%;left:0;right:0;display:flex;justify-content:center;z-index:6;}
+.ep-tag{font-size:11px;letter-spacing:.5em;color:rgba(245,198,216,.9);-webkit-text-fill-color:rgba(245,198,216,.9);padding:7px 20px;border:1px solid rgba(245,198,216,.45);border-radius:30px;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);}
+.splash-scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:6px;animation:fadeInOut 2.6s ease-in-out infinite;}
+.splash-scroll span{font-size:9.5px;letter-spacing:.3em;color:rgba(200,168,75,.7);-webkit-text-fill-color:rgba(200,168,75,.7);}
+.sh-arrow{width:16px;height:16px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);}
+@keyframes fadeInOut{0%,100%{opacity:.4;}50%{opacity:1;}}
+
+/* 씬1 수호 (검정→어두운 자주) */
+#s1{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:40px 22px 80px;background:radial-gradient(ellipse 80% 50% at 50% 50%,rgba(120,60,140,.18) 0%,transparent 65%),linear-gradient(180deg,#000 0%,#0a0612 50%,#1a0e2a 100%);}
+.s1-char{width:100%;display:flex;justify-content:center;flex:1;align-items:flex-end;}
+.s1-char img{height:auto;max-height:58svh;width:auto;max-width:88vw;object-fit:contain;filter:drop-shadow(0 8px 28px rgba(120,60,140,.35));}
+.s1-text{width:100%;max-width:480px;margin-top:20px;text-align:center;}
+.s1-text .bubble{font-size:15.5px;}
+
+/* 씬2 사랑의 구슬 (검정+골든 글로우) */
+#s2{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 20px;background:radial-gradient(ellipse 70% 55% at 50% 50%,rgba(255,180,80,.12) 0%,transparent 60%),linear-gradient(180deg,#1a0e2a 0%,#0a0612 50%,#1a0e2a 100%);min-height:100svh;}
+.orb-wrap{width:100%;max-width:420px;margin-bottom:24px;position:relative;}
+.orb-wrap img{width:100%;display:block;}
+.orb-wrap::before{content:'';position:absolute;inset:-10%;background:radial-gradient(ellipse 60% 50% at 50% 60%,rgba(255,200,100,.18) 0%,transparent 70%);pointer-events:none;z-index:-1;}
+.s2-line{font-size:18px;font-weight:300;color:var(--gold2);-webkit-text-fill-color:var(--gold2);letter-spacing:.12em;text-align:center;line-height:1.7;text-shadow:0 0 24px rgba(232,204,128,.4);margin-bottom:18px;}
+.s2-line b{font-weight:600;color:#fff5e0;-webkit-text-fill-color:#fff5e0;}
+
+/* 씬3 4명 누끼 해방 (어두운 보라→라벤더→분홍) */
+#s3{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 16px;background:linear-gradient(180deg,#1a0e2a 0%,#3a1e4a 30%,#5a3a6e 60%,#8a6a9a 90%,#b89cd0 100%);min-height:100svh;}
+.heroes-wrap{width:100%;max-width:680px;margin-bottom:22px;position:relative;}
+.heroes-wrap img{width:100%;display:block;filter:drop-shadow(0 12px 36px rgba(0,0,0,.5));}
+.heroes-wrap::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 30% at 50% 60%,rgba(255,210,230,.25) 0%,transparent 70%);pointer-events:none;}
+.s3-line{font-size:20px;font-weight:600;color:#fff;-webkit-text-fill-color:#fff;letter-spacing:.08em;text-align:center;line-height:1.7;text-shadow:0 2px 16px rgba(0,0,0,.55);margin-bottom:14px;}
+.s3-sub{font-size:13px;color:rgba(255,235,245,.85);-webkit-text-fill-color:rgba(255,235,245,.85);letter-spacing:.2em;text-align:center;margin-bottom:18px;}
+
+/* 씬4 단체샷 (밝은 하늘) */
+#s4{display:flex;flex-direction:column;align-items:center;padding:0 0 50px;background:linear-gradient(180deg,#b89cd0 0%,#d4b0d8 20%,#f0c8d8 50%,#ffd6c4 100%);min-height:100svh;}
+.s4-hero{width:100%;position:relative;overflow:hidden;}
+.s4-hero img{width:100%;display:block;}
+.s4-hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(180deg,transparent 0%,rgba(255,214,196,.7) 80%,#ffd6c4 100%);pointer-events:none;}
+.s4-content{position:relative;z-index:5;width:100%;max-width:520px;padding:0 18px;margin-top:-30px;}
+.farewell-letter{background:rgba(255,245,240,.55);border:1px solid rgba(255,255,255,.7);border-radius:20px;padding:28px 24px 26px;margin-bottom:18px;box-shadow:0 6px 24px rgba(150,80,90,.15);backdrop-filter:blur(8px);position:relative;}
+.farewell-letter::before,.farewell-letter::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(122,32,64,.3),transparent);}
+.farewell-letter::before{top:14px;}
+.farewell-letter::after{bottom:14px;}
+.fl-title{text-align:center;font-size:10.5px;letter-spacing:.4em;color:rgba(122,32,64,.75);-webkit-text-fill-color:rgba(122,32,64,.75);margin-bottom:22px;text-transform:uppercase;font-weight:600;padding-top:6px;}
+.fl-quote{text-align:center;}
+.fl-quote+.fl-quote::before{content:'';display:block;width:28%;height:1px;background:linear-gradient(90deg,transparent,rgba(122,32,64,.22),transparent);margin:18px auto;}
+.fl-text{font-size:14.5px;line-height:1.7;color:#3a1a2a;-webkit-text-fill-color:#3a1a2a;font-style:italic;font-weight:500;margin-bottom:8px;padding:0 6px;}
+.fl-author{font-size:10.5px;letter-spacing:.32em;color:#7a2040;-webkit-text-fill-color:#7a2040;font-weight:700;}
+.s4-audio-wrap{text-align:center;}
+
+/* 씬5 포토카드 + 마지막 (분홍→살구) */
+#s5{display:flex;flex-direction:column;align-items:center;padding:60px 20px 60px;background:linear-gradient(180deg,#ffd6c4 0%,#ffc8b8 30%,#f5b0a8 70%,#e89890 100%);min-height:100svh;position:relative;}
+.s5-final-text{max-width:480px;width:100%;text-align:center;margin-bottom:24px;font-size:17px;line-height:1.85;color:#3a1a2a;-webkit-text-fill-color:#3a1a2a;font-weight:500;letter-spacing:.04em;}
+.s5-final-text b{color:#7a2040;-webkit-text-fill-color:#7a2040;font-weight:700;}
+.s5-final-text em{font-style:normal;color:#8a3050;-webkit-text-fill-color:#8a3050;font-weight:600;}
+
+.photocard-section{max-width:480px;width:100%;background:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.7);border-radius:22px;padding:26px 22px;margin-bottom:22px;text-align:center;box-shadow:0 8px 30px rgba(150,80,90,.2);backdrop-filter:blur(8px);}
+.photocard-section h3{font-size:13px;letter-spacing:.3em;color:#7a2040;-webkit-text-fill-color:#7a2040;margin-bottom:10px;text-transform:uppercase;}
+.pc-desc{font-size:13.5px;line-height:1.7;color:#4a2030;-webkit-text-fill-color:#4a2030;margin-bottom:20px;}
+.pc-desc b{color:#7a2040;-webkit-text-fill-color:#7a2040;font-weight:700;}
+.pc-warn{display:block;font-size:11px;color:rgba(122,32,64,.7);-webkit-text-fill-color:rgba(122,32,64,.7);margin-top:8px;letter-spacing:.1em;font-weight:500;}
+
+.pc-stage{perspective:1200px;width:230px;height:325px;margin:0 auto 18px;position:relative;}
+.pc-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.4,.2,.2,1);}
+.pc-card.flipped{transform:rotateY(180deg);}
+.pc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;overflow:hidden;box-shadow:0 10px 32px rgba(120,40,60,.35),0 0 0 1px rgba(255,255,255,.4) inset;}
+.pc-back{background:radial-gradient(ellipse at 50% 30%,#3a1f3e 0%,#1a0a1e 70%,#0a0008 100%);display:flex;align-items:center;justify-content:center;border:1px solid rgba(232,204,128,.45);}
+.pc-back::before{content:'';position:absolute;inset:14px;border:1px solid rgba(232,204,128,.3);border-radius:8px;pointer-events:none;}
+.pc-back-content{text-align:center;padding:18px;}
+.pc-back-content .pc-bow{font-size:42px;color:var(--gold2);-webkit-text-fill-color:var(--gold2);margin-bottom:10px;text-shadow:0 0 22px rgba(232,204,128,.6);animation:pcGlow 2.4s ease-in-out infinite;}
+@keyframes pcGlow{0%,100%{filter:brightness(1) drop-shadow(0 0 8px rgba(232,204,128,.4));}50%{filter:brightness(1.35) drop-shadow(0 0 18px rgba(232,204,128,.8));}}
+.pc-back-content .pc-title{font-size:11px;letter-spacing:.3em;color:var(--gold);-webkit-text-fill-color:var(--gold);margin-bottom:6px;}
+.pc-back-content .pc-sub{font-size:9.5px;letter-spacing:.22em;color:var(--text2);-webkit-text-fill-color:var(--text2);}
+.pc-front{transform:rotateY(180deg);background:#000;}
+.pc-front img{width:100%;height:100%;object-fit:cover;display:block;}
+
+.pc-draw-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:200px;padding:13px 28px;background:linear-gradient(135deg,#fff 0%,#ffe8e0 100%);color:#7a2040!important;-webkit-text-fill-color:#7a2040!important;border:1px solid rgba(255,255,255,.9);border-radius:30px;font-size:14px;font-weight:800;letter-spacing:.1em;cursor:pointer;box-shadow:0 6px 22px rgba(150,80,90,.3);transition:all .2s;font-family:inherit;}
+.pc-draw-btn:hover:not(:disabled){filter:brightness(1.05);transform:translateY(-2px);box-shadow:0 8px 26px rgba(150,80,90,.4);}
+.pc-draw-btn:active:not(:disabled){transform:scale(.97);}
+.pc-draw-btn:disabled{background:rgba(255,255,255,.3);color:rgba(122,32,64,.5)!important;-webkit-text-fill-color:rgba(122,32,64,.5)!important;cursor:not-allowed;box-shadow:none;}
+
+.pc-result{margin-top:14px;font-size:13px;color:#7a2040;-webkit-text-fill-color:#7a2040;letter-spacing:.05em;line-height:1.7;display:none;font-weight:500;}
+.pc-result.show{display:block;animation:fadeUp .7s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.pc-result .pc-num{font-weight:800;font-size:14px;}
+
+.nav-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:340px;margin:10px auto 0;min-height:52px;padding:0 24px;border:1px solid rgba(122,32,64,.35);border-radius:14px;background:rgba(255,255,255,.4);color:#7a2040!important;-webkit-text-fill-color:#7a2040!important;text-decoration:none;font-size:13.5px;font-weight:700;letter-spacing:.06em;backdrop-filter:blur(6px);transition:all .2s;}
+.nav-btn:hover{background:rgba(255,255,255,.6);}
+.nav-btn:active{transform:scale(.97);}
+
+/* 벚꽃잎 */
+#petals{position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:hidden;}
+.petal{position:absolute;top:-20px;will-change:transform,opacity;opacity:0;animation:petalFall linear infinite;}
+.petal svg{display:block;width:100%;height:100%;}
+@keyframes petalFall{
+  0%{opacity:0;transform:translateY(-20px) translateX(0) rotate(0deg);}
+  8%{opacity:1;}
+  50%{transform:translateY(50vh) translateX(calc(var(--drift) * .5)) rotate(180deg);}
+  92%{opacity:.9;}
+  100%{opacity:0;transform:translateY(108vh) translateX(var(--drift)) rotate(360deg);}
+}
+@media (prefers-reduced-motion:reduce){.petal{animation:none;display:none;}}
+
+#bgm-toggle{position:fixed;top:16px;right:14px;z-index:9999;width:42px;height:42px;border-radius:50%;background:rgba(20,16,28,.78);border:1px solid rgba(232,204,128,.4);color:var(--gold2);-webkit-text-fill-color:var(--gold2);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 14px rgba(0,0,0,.5);backdrop-filter:blur(4px);transition:all .2s;}
+#bgm-toggle:hover{background:rgba(40,32,52,.9);border-color:var(--gold2);}
+#bgm-toggle:active{transform:scale(.92);}
+
+@media (max-width:380px){
+  .bubble{font-size:14px;padding:16px 18px;}
+  .s2-line{font-size:16px;}
+  .s3-line{font-size:18px;}
+  .s5-final-text{font-size:15.5px;}
+  .pc-stage{width:200px;height:285px;}
+}
+</style>
+</head>
+<body>
+
+<audio id="bgm" src="suho/bgm_outro.mp3" loop="" preload="auto"></audio>
+<button id="bgm-toggle" aria-label="배경음악 켜기/끄기">🎵</button>
+
+<div id="petals"><div class="petal" style="width: 13.7547px; height: 13.7547px; left: 74.8645vw; --drift: 16.18812315447819px; animation-duration: 12.6025s; animation-delay: 12.3006s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 10.8539px; height: 10.8539px; left: 96.0488vw; --drift: 53.76925691942125px; animation-duration: 12.3664s; animation-delay: 9.80271s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 9.5945px; height: 9.5945px; left: 80.7033vw; --drift: 58.34250980321437px; animation-duration: 12.1956s; animation-delay: 12.1762s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 10.9538px; height: 10.9538px; left: 89.0163vw; --drift: -40.21934683014654px; animation-duration: 20.9284s; animation-delay: 14.1972s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 13.1442px; height: 13.1442px; left: 0.245402vw; --drift: 75.70046449905271px; animation-duration: 17.3304s; animation-delay: 3.6155s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 15.079px; height: 15.079px; left: 79.8947vw; --drift: -30.42997770749689px; animation-duration: 16.4946s; animation-delay: 8.01412s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 17.7147px; height: 17.7147px; left: 95.0322vw; --drift: -90.69190126184014px; animation-duration: 17.4009s; animation-delay: 6.94761s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 11.7763px; height: 11.7763px; left: 34.5029vw; --drift: -73.82387761972208px; animation-duration: 11.9848s; animation-delay: 0.657162s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 14.1058px; height: 14.1058px; left: 65.5782vw; --drift: -7.916414139729568px; animation-duration: 16.9908s; animation-delay: 6.37515s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 8.54235px; height: 8.54235px; left: 52.8461vw; --drift: -39.800243472784636px; animation-duration: 15.1361s; animation-delay: 4.22409s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 17.0698px; height: 17.0698px; left: 0.838454vw; --drift: 12.523568247790678px; animation-duration: 17.6707s; animation-delay: 9.38463s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 17.7681px; height: 17.7681px; left: 67.5392vw; --drift: -71.37814890952454px; animation-duration: 14.6095s; animation-delay: 2.27059s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 14.3633px; height: 14.3633px; left: 64.5383vw; --drift: -52.209131528412826px; animation-duration: 13.4833s; animation-delay: 8.8354s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 11.3866px; height: 11.3866px; left: 85.6111vw; --drift: -55.301053286170585px; animation-duration: 19.4912s; animation-delay: 0.448506s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 9.83201px; height: 9.83201px; left: 23.2871vw; --drift: 37.499490144679555px; animation-duration: 15.3073s; animation-delay: 5.30526s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 12.2364px; height: 12.2364px; left: 91.5839vw; --drift: 2.65064196576148px; animation-duration: 20.6516s; animation-delay: 16.1823s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 13.2208px; height: 13.2208px; left: 77.7114vw; --drift: -23.61336038248041px; animation-duration: 17.4419s; animation-delay: 6.91749s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 16.3116px; height: 16.3116px; left: 18.0144vw; --drift: 81.19369309499982px; animation-duration: 12.7207s; animation-delay: 2.60594s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 10.9332px; height: 10.9332px; left: 32.2261vw; --drift: 86.04327759431035px; animation-duration: 19.1222s; animation-delay: 18.1763s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 17.9203px; height: 17.9203px; left: 22.6743vw; --drift: 96.73287274385623px; animation-duration: 11.2875s; animation-delay: 3.21862s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 13.7409px; height: 13.7409px; left: 56.6102vw; --drift: -10.84543562385663px; animation-duration: 19.4925s; animation-delay: 9.95322s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 17.1675px; height: 17.1675px; left: 79.2274vw; --drift: -89.24165014503612px; animation-duration: 19.4421s; animation-delay: 4.64077s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 13.807px; height: 13.807px; left: 81.7439vw; --drift: 19.821039379152865px; animation-duration: 20.1979s; animation-delay: 8.09658s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 8.69718px; height: 8.69718px; left: 95.5561vw; --drift: 39.103086267017886px; animation-duration: 16.0025s; animation-delay: 13.4535s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 9.33803px; height: 9.33803px; left: 17.3218vw; --drift: 79.38300040954041px; animation-duration: 15.4463s; animation-delay: 11.3318s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 9.69416px; height: 9.69416px; left: 13.2392vw; --drift: -65.72444342087107px; animation-duration: 20.7491s; animation-delay: 1.45692s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 12.9047px; height: 12.9047px; left: 50.1311vw; --drift: 61.888127105113995px; animation-duration: 13.9822s; animation-delay: 8.86894s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 15.8219px; height: 15.8219px; left: 35.0344vw; --drift: 26.528022856612026px; animation-duration: 16.1623s; animation-delay: 9.17378s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 12.0867px; height: 12.0867px; left: 4.88138vw; --drift: 20.45488522184226px; animation-duration: 15.5284s; animation-delay: 9.06387s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 8.50301px; height: 8.50301px; left: 48.179vw; --drift: 73.65735923579234px; animation-duration: 17.518s; animation-delay: 1.69658s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 16.3011px; height: 16.3011px; left: 28.4255vw; --drift: -63.46798618307514px; animation-duration: 14.9004s; animation-delay: 4.32963s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 16.6768px; height: 16.6768px; left: 39.0429vw; --drift: 29.853621091961912px; animation-duration: 11.6623s; animation-delay: 8.27585s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 17.7569px; height: 17.7569px; left: 58.5649vw; --drift: -75.35601772086753px; animation-duration: 19.2843s; animation-delay: 4.59412s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 13.4234px; height: 13.4234px; left: 67.2462vw; --drift: 43.51407451795137px; animation-duration: 18.5933s; animation-delay: 0.587502s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 10.9323px; height: 10.9323px; left: 23.5806vw; --drift: 59.78170891782645px; animation-duration: 16.1513s; animation-delay: 13.538s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 11.917px; height: 11.917px; left: 49.9895vw; --drift: -98.29952479081851px; animation-duration: 12.3121s; animation-delay: 11.9229s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 16.174px; height: 16.174px; left: 70.0148vw; --drift: -87.18595051503193px; animation-duration: 18.3433s; animation-delay: 11.3027s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 17.3644px; height: 17.3644px; left: 21.9525vw; --drift: -1.1453067937448083px; animation-duration: 15.5794s; animation-delay: 3.51352s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 15.1149px; height: 15.1149px; left: 53.9228vw; --drift: 93.46129926990275px; animation-duration: 11.6271s; animation-delay: 4.24435s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 8.3165px; height: 8.3165px; left: 20.7496vw; --drift: 50.01198081322943px; animation-duration: 18.663s; animation-delay: 11.7365s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 8.83236px; height: 8.83236px; left: 78.5214vw; --drift: 71.21095142441928px; animation-duration: 18.575s; animation-delay: 15.8053s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div><div class="petal" style="width: 14.9043px; height: 14.9043px; left: 73.8542vw; --drift: -37.484520424933535px; animation-duration: 17.1857s; animation-delay: 7.04102s;"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialgradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"></stop><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"></stop><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"></stop></radialgradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"></path></svg></div></div>
+
+<div class="pdots" id="pdots">
+  <div class="pdot on"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+</div>
+
+<!-- 씬0 로고 (검정) -->
+<section class="scene in-view" id="s0">
+  <div class="splash-epilogue"><div class="ep-tag">EPILOGUE</div></div>
+  <img class="splash-logo" src="file:///C:/Users/USER/Downloads/suho/logo.png" alt="버려진 활의 영혼들이 나에게 고백해왔다">
+  <div class="splash-scroll"><span>SCROLL</span><div class="sh-arrow"></div></div>
+</section>
+
+<!-- 씬1 수호 (검정→자주) -->
+<section class="scene in-view" id="s1">
+  <div class="s1-char fade-up">
+    <img src="file:///C:/Users/USER/Downloads/suho/suho2.png" alt="수호">
+  </div>
+  <div class="s1-text fade-up d1">
+    <div class="bubble">
+      …그대가, 끝까지 함께해주었구나. ✨<br><br>
+      화살이 과녁을 꿰뚫던 순간 —<br>
+      흩어진 <b>사랑의 구슬</b>이 모이고 있다.
+    </div>
+    <div style="margin-top:14px;">
+      <button class="audio-btn" id="btn-s1" data-label="수호" onclick="playAudio(&#39;s1&#39;,this)">
+        <span class="btn-icon">🔊</span> 수호
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- 씬2 사랑의 구슬 (검정+골든 글로우) -->
+<section class="scene in-view" id="s2">
+  <div class="orb-wrap fade-up">
+    <img src="file:///C:/Users/USER/Downloads/suho/loveorb.png" alt="사랑의 구슬">
+  </div>
+  <div class="s2-line fade-up d1">
+    흩어졌던 마음이,<br><b>하나의 빛이 되었다.</b>
+  </div>
+  <div class="fade-up d2">
+    <button class="audio-btn" id="btn-s2" data-label="사랑의 구슬" onclick="playAudio(&#39;s2&#39;,this)">
+      <span class="btn-icon">🔊</span> 사랑의 구슬
+    </button>
+  </div>
+</section>
+
+<!-- 씬3 4명 누끼 해방 (보라→라벤더→분홍) -->
+<section class="scene" id="s3">
+  <div class="heroes-wrap fade-up">
+    <img src="file:///C:/Users/USER/Downloads/suho/all.png" alt="네 영혼의 해방">
+  </div>
+  <div class="s3-sub fade-up d1">✦ THE SEAL IS BROKEN ✦</div>
+  <div class="s3-line fade-up d2">
+    우리는, 다시 <em style="color:#ffe0a0;-webkit-text-fill-color:#ffe0a0;">온전해졌다.</em>
+  </div>
+  <div class="fade-up d3" style="text-align:center;">
+    <button class="audio-btn" id="btn-s3" data-label="봉인 해방" onclick="playAudio(&#39;s3&#39;,this)">
+      <span class="btn-icon">🔊</span> 봉인 해방
+    </button>
+  </div>
+</section>
+
+<!-- 씬4 단체샷 (밝은 하늘) -->
+<section class="scene" id="s4">
+  <div class="s4-hero fade-up">
+    <img src="file:///C:/Users/USER/Downloads/suho/group.png" alt="네 영웅의 마지막">
+  </div>
+  <div class="s4-content">
+    <div class="farewell-letter fade-up d1">
+      <div class="fl-title">─── 네 영혼의 마지막 ───</div>
+      <div class="fl-quote">
+        <div class="fl-text">"시대의 화살을 기억해주어서, 고맙다."</div>
+        <div class="fl-author">— 시온</div>
+      </div>
+      <div class="fl-quote">
+        <div class="fl-text">"활시위 소리가, 그대 마음에 닿았기를."</div>
+        <div class="fl-author">— 태용</div>
+      </div>
+      <div class="fl-quote">
+        <div class="fl-text">"우리의 활이 오늘에 닿았음을, 증명해주었다."</div>
+        <div class="fl-author">— 건호</div>
+      </div>
+      <div class="fl-quote">
+        <div class="fl-text">"수백 년을 기다린 보람이, 그대였다."</div>
+        <div class="fl-author">— 수호</div>
+      </div>
+    </div>
+    <div class="s4-audio-wrap fade-up d2">
+      <button class="audio-btn" id="btn-s4" data-label="네 영웅" onclick="playAudio(&#39;s4&#39;,this)">
+        <span class="btn-icon">🔊</span> 네 영웅
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- 씬5 포토카드 + 마지막 (분홍→살구) -->
+<section class="scene" id="s5">
+  <div class="s5-final-text fade-up">
+    그대가 새긴 기억은,<br>
+    <b>영원히 우리의 빛으로 남는다.</b><br><br>
+    <em>이 작은 정표 하나를, 받아가다오.</em>
+  </div>
+
+  <div class="photocard-section fade-up d1">
+    <h3>🎴 기념 포토카드</h3>
+    <div class="pc-desc">
+      여덟 정표 중, <b>그대만의 단 한 장.</b>
+      <span class="pc-warn">※ 한 번뿐인 인연 — 신중히 뽑아다오</span>
+    </div>
+    <div class="pc-stage">
+      <div class="pc-card" id="pcCard">
+        <div class="pc-face pc-back">
+          <div class="pc-back-content">
+            <div class="pc-bow">🏹</div>
+            <div class="pc-title">SOULS</div>
+            <div class="pc-sub">BUCHEON BOW MUSEUM</div>
+          </div>
+        </div>
+        <div class="pc-face pc-front">
+          <img id="pcFrontImg" src="file:///C:/Users/USER/Downloads/Suho_Outro.html" alt="포토카드">
+        </div>
+      </div>
+    </div>
+    <button class="pc-draw-btn" id="pcDrawBtn" onclick="drawPhotocard()">
+      <span>✦</span><span>포토카드 뽑기</span>
+    </button>
+    <div class="pc-result" id="pcResult">
+      <span class="pc-num">No. <span id="pcNum">—</span></span><br>
+      <span id="pcMsg">그대의 정표.<br>부디 잘 간직해다오.</span>
+    </div>
+  </div>
+
+  <div class="fade-up d2" style="text-align:center;margin-bottom:14px;">
+    <button class="audio-btn" id="btn-s5" data-label="마지막 인사" onclick="playAudio(&#39;s5&#39;,this)">
+      <span class="btn-icon">🔊</span> 마지막 인사
+    </button>
+  </div>
+
+  <a class="nav-btn fade-up d3" href="https://www.bcmuseum.or.kr/ko/pages/exhi_permanent02" target="_blank">
+    <span>🏛️</span><span>활박물관 공식 홈페이지</span>
+  </a>
+  <a class="nav-btn fade-up d4" href="https://hyeyoon0524.github.io/bucheon-bow-museum/Suho_Intro.html">
+    <span>↺</span><span>처음으로 돌아가기</span>
+  </a>
+</section>
+
+<script>
+(()=>{
+  const scenes=[...document.querySelectorAll('.scene')];
+  function setDot(i){document.querySelectorAll('.pdot').forEach((d,j)=>d.classList.toggle('on',i===j));}
+  function reveal(s){if(s)s.classList.add('in-view');}
+  function checkScenes(){
+    const mid=window.innerHeight*.52;let active=0;
+    scenes.forEach((scene,i)=>{
+      const r=scene.getBoundingClientRect();
+      if(r.top<window.innerHeight*.86&&r.bottom>window.innerHeight*.14)reveal(scene);
+      if(r.top<=mid&&r.bottom>=mid)active=i;
+    });
+    setDot(active);
+  }
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting)reveal(e.target);});checkScenes();
+  },{threshold:.12,rootMargin:'0px 0px -3% 0px'});
+  scenes.forEach(s=>observer.observe(s));
+  let ticking=false;
+  window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{checkScenes();ticking=false;});ticking=true;}},{passive:true});
+  window.addEventListener('resize',checkScenes);
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',checkScenes,{once:true});}
+  else{requestAnimationFrame(checkScenes);}
+  setInterval(checkScenes,250);
+})();
+
+/* 벚꽃잎 */
+(()=>{
+  const container=document.getElementById('petals');
+  if(!container)return;
+  const COUNT=window.innerWidth<480?26:42;
+  const petalSVG = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff5f8" stop-opacity="1"/><stop offset="60%" stop-color="#f5c6d8" stop-opacity=".95"/><stop offset="100%" stop-color="#e8a5c0" stop-opacity=".85"/></radialGradient></defs><path d="M12 2 C 16 6, 18 12, 12 22 C 6 12, 8 6, 12 2 Z" fill="url(#pg)" opacity="0.92"/></svg>';
+  for(let i=0;i<COUNT;i++){
+    const p=document.createElement('div');
+    p.className='petal';
+    const size=Math.random()*10+8;
+    p.style.width=size+'px';
+    p.style.height=size+'px';
+    p.style.left=Math.random()*100+'vw';
+    p.style.setProperty('--drift',(Math.random()*200-100)+'px');
+    const dur=Math.random()*10+11;
+    p.style.animationDuration=dur+'s';
+    p.style.animationDelay=(Math.random()*dur)+'s';
+    p.innerHTML=petalSVG;
+    container.appendChild(p);
+  }
+})();
+
+/* BGM */
+(()=>{
+  const bgm=document.getElementById('bgm');
+  const toggle=document.getElementById('bgm-toggle');
+  if(!bgm||!toggle)return;
+  bgm.volume=0.35;
+  let playing=false;
+  function tryPlay(){
+    if(playing)return;
+    bgm.play().then(()=>{playing=true;toggle.textContent='🎵';}).catch(()=>{});
+  }
+  tryPlay();
+  ['click','touchstart','scroll','keydown'].forEach(ev=>{
+    window.addEventListener(ev,tryPlay,{once:true,passive:true});
+  });
+  toggle.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    if(bgm.paused){bgm.play().then(()=>{playing=true;toggle.textContent='🎵';}).catch(()=>{});}
+    else{bgm.pause();playing=false;toggle.textContent='🔇';}
+  });
+})();
+
+/* 음성 버튼 */
+const audioFiles={
+  s1:'audio/out1_suho.mp3',
+  s2:'audio/out2_orb.mp3',
+  s3:'audio/out3_release.mp3',
+  s4:'audio/out4_heroes.mp3',
+  s5:'audio/out5_last.mp3',
+};
+let currentAudio=null;
+let currentBtn=null;
+function playAudio(key, btn){
+  const label = btn.getAttribute('data-label') || '음성 듣기';
+  if(currentAudio && !currentAudio.paused){
+    currentAudio.pause();currentAudio.currentTime=0;
+    if(currentBtn){currentBtn.classList.remove('playing');currentBtn.innerHTML='<span class="btn-icon">🔊</span> '+currentBtn.getAttribute('data-label');}
+    if(currentBtn===btn){currentAudio=null;currentBtn=null;return;}
+  }
+  const audio=new Audio(audioFiles[key]);
+  currentAudio=audio;currentBtn=btn;
+  const bgm=document.getElementById('bgm');
+  if(bgm&&!bgm.paused)bgm.volume=0.12;
+  btn.classList.add('playing');
+  btn.innerHTML='<span class="btn-icon">⏸</span> 재생 중...';
+  audio.play().catch(()=>{
+    btn.classList.remove('playing');
+    btn.innerHTML='<span class="btn-icon">🔊</span> '+label;
+    currentAudio=null;currentBtn=null;
+    if(bgm&&!bgm.paused)bgm.volume=0.35;
+  });
+  audio.addEventListener('ended',()=>{
+    btn.classList.remove('playing');
+    btn.innerHTML='<span class="btn-icon">🔊</span> '+label;
+    currentAudio=null;currentBtn=null;
+    if(bgm&&!bgm.paused)bgm.volume=0.35;
+  });
+}
+
+/* 포토카드 (한 번만) */
+const PHOTOCARD_COUNT = 8;
+const PHOTOCARD_KEY = 'bcm_outro_photocard';
+
+function getDrawnCard(){
+  try{return localStorage.getItem(PHOTOCARD_KEY);}catch(e){return null;}
+}
+function saveDrawnCard(num){
+  try{localStorage.setItem(PHOTOCARD_KEY, String(num));}catch(e){}
+}
+function showPhotocard(num, isReplay){
+  const card = document.getElementById('pcCard');
+  const img = document.getElementById('pcFrontImg');
+  const btn = document.getElementById('pcDrawBtn');
+  const result = document.getElementById('pcResult');
+  const numEl = document.getElementById('pcNum');
+  const msgEl = document.getElementById('pcMsg');
+  img.src = 'photocards/card' + num + '.png';
+  numEl.textContent = String(num).padStart(2,'0') + ' / 08';
+  if(isReplay){
+    card.style.transition = 'none';
+    card.classList.add('flipped');
+    setTimeout(()=>{card.style.transition='';},50);
+    msgEl.innerHTML = '이미 그대에게 주어진 정표.<br>다시 만난 인연이다.';
+  }else{
+    card.classList.add('flipped');
+    msgEl.innerHTML = '그대의 정표.<br>부디 잘 간직해다오.';
+  }
+  result.classList.add('show');
+  btn.disabled = true;
+  btn.innerHTML = '<span>✓</span><span>이미 뽑았습니다</span>';
+}
+function drawPhotocard(){
+  if(getDrawnCard()) return;
+  const num = Math.floor(Math.random() * PHOTOCARD_COUNT) + 1;
+  saveDrawnCard(num);
+  showPhotocard(num, false);
+}
+(()=>{
+  const drawn = getDrawnCard();
+  if(drawn){
+    const n = parseInt(drawn, 10);
+    if(n >= 1 && n <= PHOTOCARD_COUNT){
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', ()=>showPhotocard(n, true), {once:true});
+      }else{
+        showPhotocard(n, true);
+      }
+    }
+  }
+})();
+</script>
+
+</body></html>
