@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)file:///C:/Users/USER/Downloads/intro_1.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>부천시 활박물관 — 입장 도슨트</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  color-scheme:only dark;
+  --bg:#0c0c10;--bg2:#12121a;--bg3:#181824;--card:#1c1c28;
+  --gold:#c8a84b;--gold2:#e8cc80;--text:#ede8dc;--text2:#9a8f7a;
+  --bubble:#1a1626;--bline:rgba(180,150,90,.4);--border:rgba(200,168,75,.2);
+}
+html,body{background:var(--bg)!important;color:var(--text)!important;-webkit-text-fill-color:var(--text);}
+body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;overflow-x:hidden;}
+
+.scene{width:100%;min-height:100svh;position:relative;overflow:hidden;background:var(--bg);}
+.section-rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.25;}
+
+.bubble{background:var(--bubble);border:1.5px solid var(--bline);border-radius:16px;padding:15px 17px;font-size:14.5px;line-height:1.75;color:var(--text);-webkit-text-fill-color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.5);position:relative;}
+.bubble b{color:var(--gold2);-webkit-text-fill-color:var(--gold2);font-weight:600;}
+.bubble em{color:#d8b86a;-webkit-text-fill-color:#d8b86a;font-style:normal;}
+.bubble.tail-bl::after{content:'';position:absolute;bottom:-9px;left:22px;border-left:9px solid transparent;border-right:9px solid transparent;border-top:9px solid var(--bline);}
+.bubble.tail-r::after{content:'';position:absolute;top:22px;right:-9px;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:9px solid var(--bline);}
+
+.pdots{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:999;display:flex;flex-direction:column;gap:7px;}
+.pdot{width:5px;height:5px;border-radius:3px;background:rgba(200,168,75,.25);transition:all .3s;}
+.pdot.on{height:18px;background:var(--gold);}
+
+.badge,.bubble-wrap,.intro-char,.scroll-hint,
+.ch-label,.ch-title,.ch-en,.ch-desc,
+.info-card,.guide-card,.side-char,
+.s6-bubble,.next-info,.zone-card{
+  opacity:0;transition:opacity .72s ease, transform .72s cubic-bezier(.2,.8,.2,1);
+}
+.bubble-wrap{transform:translateY(18px);}
+.intro-char{transform:translateY(82px);}
+.scroll-hint{transform:translateX(-50%) translateY(8px);}
+.ch-label{transform:translateX(-16px);}
+.ch-title,.ch-desc{transform:translateY(24px);}
+.ch-en{transform:translateY(10px);}
+.ch-rule{transform:scaleX(0);transform-origin:left center;transition:transform .8s cubic-bezier(.2,.8,.2,1);}
+.info-card,.guide-card,.zone-card{transform:translateY(28px);}
+.side-char{transform:translateX(52px);}
+.s6-bubble,.next-info{transform:translateY(16px);}
+
+.scene.in-view .badge,.scene.in-view .bubble-wrap,.scene.in-view .intro-char,
+.scene.in-view .scroll-hint,.scene.in-view .ch-label,.scene.in-view .ch-title,
+.scene.in-view .ch-en,.scene.in-view .ch-desc,.scene.in-view .info-card,
+.scene.in-view .guide-card,.scene.in-view .zone-card,.scene.in-view .side-char,
+.scene.in-view .s6-bubble,.scene.in-view .next-info{opacity:1;transform:translate(0,0) scale(1);}
+.scene.in-view .scroll-hint{transform:translateX(-50%) translateY(0);}
+.scene.in-view .ch-rule{transform:scaleX(1);}
+
+.scene.in-view .ch-title{transition-delay:.08s;}
+.scene.in-view .ch-en{transition-delay:.16s;}
+.scene.in-view .ch-rule{transition-delay:.22s;}
+.scene.in-view .ch-desc{transition-delay:.3s;}
+.scene.in-view .guide-card:nth-of-type(1){transition-delay:.1s;}
+.scene.in-view .guide-card:nth-of-type(2){transition-delay:.24s;}
+.scene.in-view .guide-card:nth-of-type(3){transition-delay:.38s;}
+.scene.in-view .zone-card:nth-child(1){transition-delay:.05s;}
+.scene.in-view .zone-card:nth-child(2){transition-delay:.13s;}
+.scene.in-view .zone-card:nth-child(3){transition-delay:.21s;}
+.scene.in-view .zone-card:nth-child(4){transition-delay:.29s;}
+.scene.in-view .zone-card:nth-child(5){transition-delay:.37s;}
+.scene.in-view .zone-card:nth-child(6){transition-delay:.45s;}
+.scene.in-view .next-info{transition-delay:.18s;}
+
+/* 음성 버튼 */
+.audio-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:rgba(200,168,75,.1);border:1px solid rgba(200,168,75,.35);border-radius:30px;padding:8px 16px;font-size:13px;color:var(--gold2);-webkit-text-fill-color:var(--gold2);cursor:pointer;transition:all .2s;letter-spacing:.05em;-webkit-appearance:none;appearance:none;}
+.audio-btn:hover{background:rgba(200,168,75,.2);}
+.audio-btn:active{transform:scale(.96);}
+.audio-btn.playing{background:rgba(200,168,75,.2);border-color:var(--gold2);animation:btnPulse 1.5s infinite;}
+@keyframes btnPulse{0%,100%{box-shadow:0 0 0 0 rgba(200,168,75,.3);}50%{box-shadow:0 0 0 6px rgba(200,168,75,0);}}
+.audio-btn .btn-icon{font-size:16px;}
+
+/* 씬1 인트로 */
+#s1{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;background:radial-gradient(ellipse 90% 60% at 50% 100%,rgba(180,140,50,.1) 0%,transparent 70%),linear-gradient(180deg,#08080f 0%,var(--bg) 100%);}
+.s1-badge{position:absolute;top:24px;left:0;right:0;display:flex;justify-content:center;z-index:10;}
+.s1-logo{width:auto;height:200px;max-width:80vw;object-fit:contain;
+  filter:drop-shadow(0 0 18px rgba(200,168,75,.35));
+  animation:logoFloat 5.5s ease-in-out infinite, logoGlow 3.2s ease-in-out infinite;
+  transform-origin:center center;}
+@keyframes logoFloat{
+  0%{transform:translateY(0) rotate(-2.2deg);}
+  50%{transform:translateY(-10px) rotate(2.2deg);}
+  100%{transform:translateY(0) rotate(-2.2deg);}
+}
+@keyframes logoGlow{
+  0%,100%{filter:drop-shadow(0 0 14px rgba(200,168,75,.28)) brightness(1);}
+  50%{filter:drop-shadow(0 0 26px rgba(240,223,160,.6)) brightness(1.12);}
+}
+@media (prefers-reduced-motion:reduce){.s1-logo{animation:none;}}
+.s1-bubble-wrap{width:100%;padding:0 22px;z-index:20;}
+.intro-char{z-index:10;display:flex;justify-content:center;margin-top:-20px;}
+.intro-char img{height:340px;width:auto;max-width:94vw;object-fit:contain;filter:drop-shadow(0 6px 24px rgba(0,0,0,.7));}
+.scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:5px;}
+.scroll-hint span{font-size:9px;letter-spacing:.25em;color:var(--text2);-webkit-text-fill-color:var(--text2);}
+.sh-arrow{width:18px;height:18px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);animation:abounce 1.4s infinite;}
+@keyframes abounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(5px)}}
+
+/* 씬2 타이틀 */
+#s2{display:flex;flex-direction:column;justify-content:center;padding:70px 28px 60px;background:linear-gradient(180deg,var(--bg2) 0%,var(--bg3) 100%);}
+.ch-label{font-size:10px;letter-spacing:.4em;color:var(--gold);-webkit-text-fill-color:var(--gold);margin-bottom:10px;text-transform:uppercase;}
+.ch-title{font-size:34px;font-weight:700;line-height:1.25;margin-bottom:6px;}
+.ch-title span{color:var(--gold);-webkit-text-fill-color:var(--gold);}
+.ch-en{font-size:12px;color:var(--text2);-webkit-text-fill-color:var(--text2);letter-spacing:.18em;}
+.ch-rule{width:55%;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0;}
+.ch-desc{font-size:14px;line-height:1.9;color:var(--text2);-webkit-text-fill-color:var(--text2);}
+
+/* 씬3 박물관 소개 */
+#s3{display:flex;flex-direction:column;align-items:center;padding:50px 20px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg3) 100%);}
+.s3-top-char{display:flex;justify-content:center;margin-bottom:-10px;}
+.s3-top-char img{height:300px;width:auto;max-width:92vw;object-fit:contain;filter:drop-shadow(0 8px 24px rgba(0,0,0,.6));}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:0 3px 16px rgba(0,0,0,.3);max-width:560px;width:100%;}
+.info-card h3{font-size:11px;letter-spacing:.16em;color:var(--gold);-webkit-text-fill-color:var(--gold);margin-bottom:10px;text-transform:uppercase;}
+.info-card p{font-size:14px;line-height:1.85;color:var(--text);-webkit-text-fill-color:var(--text);}
+.info-card p+p{margin-top:9px;}
+.info-card p b{color:var(--gold2);-webkit-text-fill-color:var(--gold2);}
+
+/* 씬4 전시 구역 */
+#s4{display:flex;flex-direction:column;align-items:center;padding:56px 20px;background:var(--bg2);}
+.zone-head{text-align:center;margin-bottom:22px;max-width:560px;}
+.zone-head h2{font-size:22px;font-weight:700;color:var(--gold2);-webkit-text-fill-color:var(--gold2);margin-bottom:6px;}
+.zone-head p{font-size:13px;color:var(--text2);-webkit-text-fill-color:var(--text2);line-height:1.7;}
+.zone-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;max-width:560px;width:100%;}
+.zone-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:15px 14px;box-shadow:0 3px 14px rgba(0,0,0,.3);}
+.zone-card .zn{font-size:9.5px;letter-spacing:.14em;color:var(--gold);-webkit-text-fill-color:var(--gold);margin-bottom:5px;}
+.zone-card h4{font-size:14.5px;font-weight:700;color:var(--text);-webkit-text-fill-color:var(--text);margin-bottom:4px;}
+.zone-card p{font-size:11.5px;line-height:1.55;color:var(--text2);-webkit-text-fill-color:var(--text2);}
+
+/* 씬5 가이드 소개 */
+#s5{display:flex;flex-direction:column;align-items:center;padding:56px 20px;background:linear-gradient(180deg,var(--bg3) 0%,var(--bg2) 100%);}
+.guide-head{text-align:center;margin-bottom:24px;max-width:560px;}
+.guide-head h2{font-size:22px;font-weight:700;color:var(--gold2);-webkit-text-fill-color:var(--gold2);margin-bottom:6px;}
+.guide-head p{font-size:13px;color:var(--text2);-webkit-text-fill-color:var(--text2);line-height:1.7;}
+.guide-card{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:13px;box-shadow:0 3px 16px rgba(0,0,0,.3);max-width:560px;width:100%;}
+.guide-num{flex-shrink:0;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;border:1.5px solid;}
+.guide-card.shion .guide-num{color:#7ec8a0;-webkit-text-fill-color:#7ec8a0;border-color:rgba(126,200,160,.5);background:rgba(126,200,160,.1);}
+.guide-card.tae .guide-num{color:#9ab8e8;-webkit-text-fill-color:#9ab8e8;border-color:rgba(154,184,232,.5);background:rgba(154,184,232,.1);}
+.guide-card.gun .guide-num{color:#e8b86a;-webkit-text-fill-color:#e8b86a;border-color:rgba(232,184,106,.5);background:rgba(232,184,106,.1);}
+.guide-info h4{font-size:15px;font-weight:700;color:var(--text);-webkit-text-fill-color:var(--text);margin-bottom:3px;}
+.guide-info .role{font-size:10px;letter-spacing:.1em;color:var(--gold);-webkit-text-fill-color:var(--gold);margin-bottom:5px;}
+.guide-info p{font-size:12.5px;line-height:1.6;color:var(--text2);-webkit-text-fill-color:var(--text2);}
+
+/* 씬6 마무리 */
+#s6{display:flex;flex-direction:column;align-items:center;padding:0 0 50px;background:#000;position:relative;}
+/* 캐릭터를 화면 꽉 채움 - 옷깃 잘린 부분은 하단 그라데이션으로 가림 */
+.s6-char{position:relative;width:100%;display:flex;justify-content:center;background:#000;}
+.s6-char img{width:100%;max-width:560px;height:auto;display:block;object-fit:cover;}
+/* 좌우+하단 검정 페이드로 누끼 경계 자연스럽게 */
+.s6-char::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55) 82%,#000 100%),
+             radial-gradient(ellipse 80% 90% at 50% 45%,transparent 60%,rgba(0,0,0,.5) 100%);}
+.final-content{position:relative;z-index:10;width:100%;max-width:520px;text-align:center;padding:0 20px;margin-top:-30px;}
+.s6-bubble{margin-bottom:18px;}
+.s6-bubble .bubble{text-align:center;background:rgba(22,18,30,.82);backdrop-filter:blur(2px);}
+.s6-bubble .bubble.tail-r::after{display:none;}
+.next-info{background:rgba(200,168,75,.08);border:1px solid rgba(200,168,75,.22);border-radius:12px;padding:16px;margin-bottom:12px;}
+.next-info h4{font-size:12px;letter-spacing:.18em;color:var(--gold);-webkit-text-fill-color:var(--gold);margin-bottom:6px;text-transform:uppercase;}
+.next-info p{font-size:13px;line-height:1.7;color:var(--text2);-webkit-text-fill-color:var(--text2);}
+
+.nav-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:340px;margin:14px auto 0;min-height:60px;padding:0 24px;border:1px solid rgba(232,204,128,.72);border-radius:16px;background:linear-gradient(135deg,#f0dfa0 0%,#c8a84b 100%);color:#15100a!important;-webkit-text-fill-color:#15100a!important;text-decoration:none;font-size:15px;font-weight:800;letter-spacing:.04em;box-shadow:0 12px 32px rgba(200,168,75,.32),0 0 0 1px rgba(255,255,255,.1) inset;transition:transform .18s ease,filter .18s ease,box-shadow .3s ease;position:relative;overflow:hidden;}
+.nav-btn::after{content:'›';font-size:24px;line-height:1;margin-top:-1px;}
+.nav-btn:active{transform:scale(.97);}
+.nav-btn:hover{filter:brightness(1.08);box-shadow:0 14px 38px rgba(200,168,75,.5),0 0 0 1px rgba(255,255,255,.14) inset;}
+.nav-btn.primary{animation:btnGlow 2.6s ease-in-out infinite;}
+@keyframes btnGlow{0%,100%{box-shadow:0 12px 32px rgba(200,168,75,.32),0 0 0 1px rgba(255,255,255,.1) inset;}50%{box-shadow:0 12px 40px rgba(232,204,128,.6),0 0 0 1px rgba(255,255,255,.18) inset;}}
+.nav-btn.outline{background:rgba(200,168,75,.06);color:var(--gold2)!important;-webkit-text-fill-color:var(--gold2)!important;box-shadow:none;border-color:rgba(200,168,75,.45);font-weight:700;font-size:13px;min-height:52px;animation:none;}
+.nav-btn.outline::after{content:'';}
+.nav-btn.outline:hover{background:rgba(200,168,75,.14);box-shadow:none;}
+
+/* 금가루 파티클 */
+#gold-dust{position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:hidden;}
+.dust{position:absolute;top:-10px;border-radius:50%;background:radial-gradient(circle,#f0dfa0 0%,#c8a84b 60%,transparent 100%);opacity:0;animation:dustFall linear infinite;will-change:transform,opacity;}
+@keyframes dustFall{
+  0%{opacity:0;transform:translateY(-10px) translateX(0) rotate(0deg);}
+  10%{opacity:1;}
+  90%{opacity:.9;}
+  100%{opacity:0;transform:translateY(105vh) translateX(var(--drift)) rotate(360deg);}
+}
+@media (prefers-reduced-motion:reduce){.dust{animation:none;display:none;}}
+
+/* 로고 스플래시 (맨 위 풀스크린) */
+#s0{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:#000;position:relative;}
+.splash-logo{width:auto;height:62svh;max-height:760px;max-width:92vw;object-fit:contain;
+  animation:logoFloat 5.5s ease-in-out infinite, logoGlow 3.2s ease-in-out infinite;
+  transform-origin:center center;}
+/* 아래쪽으로 그라데이션 페이드 (검정 → 인트로 배경) */
+#s0::after{content:'';position:absolute;left:0;right:0;bottom:0;height:30%;
+  background:linear-gradient(180deg,transparent 0%,var(--bg) 100%);pointer-events:none;}
+.splash-scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  z-index:5;display:flex;flex-direction:column;align-items:center;gap:6px;
+  animation:fadeInOut 2.6s ease-in-out infinite;}
+.splash-scroll span{font-size:9.5px;letter-spacing:.3em;color:rgba(200,168,75,.7);-webkit-text-fill-color:rgba(200,168,75,.7);}
+.splash-scroll .sh-arrow{width:16px;height:16px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);}
+@keyframes fadeInOut{0%,100%{opacity:.4;}50%{opacity:1;}}
+@media (prefers-reduced-motion:reduce){.splash-logo{animation:none;}}
+</style>
+</head>
+<body>
+
+<div id="gold-dust"><div class="dust" style="width: 4.12293px; height: 4.12293px; left: 50.0285vw; --drift: 44.14830174153512px; animation-duration: 12.9947s; animation-delay: 8.43948s;"></div><div class="dust" style="width: 1.56px; height: 1.56px; left: 9.14047vw; --drift: 1.9200548831713036px; animation-duration: 7.82828s; animation-delay: 6.71506s;"></div><div class="dust" style="width: 5.48411px; height: 5.48411px; left: 46.4203vw; --drift: -46.301920513774746px; animation-duration: 13.1356s; animation-delay: 6.34844s;"></div><div class="dust" style="width: 2.39907px; height: 2.39907px; left: 16.8143vw; --drift: 33.92328987627086px; animation-duration: 12.0158s; animation-delay: 10.3003s;"></div><div class="dust" style="width: 4.66184px; height: 4.66184px; left: 50.036vw; --drift: 42.29012285448039px; animation-duration: 9.64438s; animation-delay: 4.16494s;"></div><div class="dust" style="width: 1.52737px; height: 1.52737px; left: 81.9892vw; --drift: -4.3356839413052555px; animation-duration: 9.71599s; animation-delay: 6.72132s;"></div><div class="dust" style="width: 4.0601px; height: 4.0601px; left: 68.0778vw; --drift: 23.35759032497674px; animation-duration: 11.4214s; animation-delay: 1.43613s;"></div><div class="dust" style="width: 3.58884px; height: 3.58884px; left: 9.23812vw; --drift: 10.865321448140733px; animation-duration: 10.6494s; animation-delay: 9.12989s;"></div><div class="dust" style="width: 3.28647px; height: 3.28647px; left: 9.81967vw; --drift: -32.131459102033176px; animation-duration: 7.23315s; animation-delay: 5.74711s;"></div><div class="dust" style="width: 5.18643px; height: 5.18643px; left: 90.0268vw; --drift: 0.7266216536216845px; animation-duration: 10.3332s; animation-delay: 3.13502s;"></div><div class="dust" style="width: 4.40228px; height: 4.40228px; left: 65.1904vw; --drift: -24.518735031471785px; animation-duration: 8.57904s; animation-delay: 2.81565s;"></div><div class="dust" style="width: 2.37491px; height: 2.37491px; left: 94.8915vw; --drift: -42.10808589531847px; animation-duration: 9.71032s; animation-delay: 1.08468s;"></div><div class="dust" style="width: 2.28796px; height: 2.28796px; left: 33.5629vw; --drift: 43.13592504418092px; animation-duration: 14.6505s; animation-delay: 6.23835s;"></div><div class="dust" style="width: 4.89745px; height: 4.89745px; left: 14.4437vw; --drift: 8.489946535949272px; animation-duration: 10.6486s; animation-delay: 1.56478s;"></div><div class="dust" style="width: 5.01246px; height: 5.01246px; left: 31.097vw; --drift: -41.69263396094448px; animation-duration: 13.7079s; animation-delay: 11.9196s;"></div><div class="dust" style="width: 4.20171px; height: 4.20171px; left: 76.5643vw; --drift: -33.247098437640595px; animation-duration: 9.54171s; animation-delay: 9.07177s;"></div><div class="dust" style="width: 3.57227px; height: 3.57227px; left: 83.0905vw; --drift: -28.81337712827797px; animation-duration: 7.32744s; animation-delay: 5.61624s;"></div><div class="dust" style="width: 1.91088px; height: 1.91088px; left: 4.65646vw; --drift: -34.23935280112543px; animation-duration: 9.42699s; animation-delay: 4.75666s;"></div><div class="dust" style="width: 4.8041px; height: 4.8041px; left: 84.2944vw; --drift: -2.1137920899257168px; animation-duration: 11.5364s; animation-delay: 3.25195s;"></div><div class="dust" style="width: 3.04517px; height: 3.04517px; left: 15.4689vw; --drift: -49.59562278374172px; animation-duration: 12.3009s; animation-delay: 3.88607s;"></div><div class="dust" style="width: 1.88223px; height: 1.88223px; left: 47.6307vw; --drift: 15.40936591488827px; animation-duration: 13.6447s; animation-delay: 12.4009s;"></div><div class="dust" style="width: 5.40482px; height: 5.40482px; left: 89.4024vw; --drift: -17.445808957087323px; animation-duration: 8.8196s; animation-delay: 2.43708s;"></div><div class="dust" style="width: 2.89188px; height: 2.89188px; left: 89.9104vw; --drift: 4.752518483108275px; animation-duration: 9.40722s; animation-delay: 4.5633s;"></div><div class="dust" style="width: 3.75172px; height: 3.75172px; left: 39.5084vw; --drift: 38.99235249326762px; animation-duration: 13.3716s; animation-delay: 7.18611s;"></div><div class="dust" style="width: 3.47109px; height: 3.47109px; left: 31.5918vw; --drift: -3.5467151389503755px; animation-duration: 14.2394s; animation-delay: 11.8786s;"></div><div class="dust" style="width: 2.53219px; height: 2.53219px; left: 43.9673vw; --drift: 16.886053695983335px; animation-duration: 9.0619s; animation-delay: 7.4108s;"></div><div class="dust" style="width: 2.4082px; height: 2.4082px; left: 5.85494vw; --drift: -45.8832183058765px; animation-duration: 12.7847s; animation-delay: 1.36813s;"></div><div class="dust" style="width: 2.8095px; height: 2.8095px; left: 24.6673vw; --drift: 36.58948116644213px; animation-duration: 9.04041s; animation-delay: 0.679582s;"></div><div class="dust" style="width: 2.91281px; height: 2.91281px; left: 49.8541vw; --drift: 5.773481455073153px; animation-duration: 13.8141s; animation-delay: 9.48265s;"></div><div class="dust" style="width: 1.53763px; height: 1.53763px; left: 67.4258vw; --drift: -42.810495372947265px; animation-duration: 13.1415s; animation-delay: 8.25968s;"></div><div class="dust" style="width: 2.1899px; height: 2.1899px; left: 86.4031vw; --drift: 13.552523770004612px; animation-duration: 11.4116s; animation-delay: 8.95741s;"></div><div class="dust" style="width: 2.57152px; height: 2.57152px; left: 43.1777vw; --drift: -44.145281445469px; animation-duration: 12.3989s; animation-delay: 11.8052s;"></div><div class="dust" style="width: 1.59471px; height: 1.59471px; left: 24.0925vw; --drift: -16.59291257991213px; animation-duration: 11.1949s; animation-delay: 4.58244s;"></div><div class="dust" style="width: 1.52878px; height: 1.52878px; left: 61.3387vw; --drift: -20.817987192894492px; animation-duration: 7.475s; animation-delay: 2.07667s;"></div><div class="dust" style="width: 5.43921px; height: 5.43921px; left: 1.95074vw; --drift: -41.30430361265461px; animation-duration: 9.30796s; animation-delay: 3.67898s;"></div><div class="dust" style="width: 5.07037px; height: 5.07037px; left: 23.4824vw; --drift: -6.304149792970215px; animation-duration: 10.8346s; animation-delay: 6.9949s;"></div><div class="dust" style="width: 5.15707px; height: 5.15707px; left: 18.1795vw; --drift: 14.192982885691123px; animation-duration: 12.0586s; animation-delay: 8.37498s;"></div><div class="dust" style="width: 3.05623px; height: 3.05623px; left: 73.1776vw; --drift: 45.63240711277338px; animation-duration: 13.0277s; animation-delay: 7.02947s;"></div><div class="dust" style="width: 4.70735px; height: 4.70735px; left: 17.6471vw; --drift: 57.47307579178016px; animation-duration: 13.0512s; animation-delay: 9.45318s;"></div><div class="dust" style="width: 2.15363px; height: 2.15363px; left: 40.93vw; --drift: 47.83364516479686px; animation-duration: 11.5573s; animation-delay: 3.83785s;"></div><div class="dust" style="width: 2.53361px; height: 2.53361px; left: 60.5216vw; --drift: -33.74473376769593px; animation-duration: 8.00673s; animation-delay: 2.67904s;"></div><div class="dust" style="width: 4.92281px; height: 4.92281px; left: 20.8172vw; --drift: 22.965360959702565px; animation-duration: 9.01035s; animation-delay: 5.05558s;"></div><div class="dust" style="width: 3.44384px; height: 3.44384px; left: 81.2733vw; --drift: 28.51412735125821px; animation-duration: 10.8109s; animation-delay: 6.28659s;"></div><div class="dust" style="width: 3.17649px; height: 3.17649px; left: 58.7443vw; --drift: -38.67339118296246px; animation-duration: 13.9884s; animation-delay: 12.8165s;"></div><div class="dust" style="width: 5.31811px; height: 5.31811px; left: 30.2515vw; --drift: -1.8866987402146833px; animation-duration: 12.3807s; animation-delay: 9.42424s;"></div></div>
+
+<div class="pdots" id="pdots">
+  <div class="pdot on"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+  <div class="pdot"></div>
+</div>
+
+<!-- ══ 씬0: 로고 스플래시 ══ -->
+<section class="scene in-view" id="s0">
+  <img class="splash-logo" src="file:///C:/Users/USER/Downloads/suho/logo.png" alt="버려진 활의 영혼들이 나에게 고백해왔다">
+  <div class="splash-scroll">
+    <span>SCROLL</span>
+    <div class="sh-arrow"></div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬1: 인트로 ══ -->
+<section class="scene in-view" id="s1">
+  <div style="flex:1;display:flex;align-items:flex-end;padding:90px 22px 0;width:100%;z-index:20;"></div>
+  <div class="s1-bubble-wrap bubble-wrap">
+    <button class="audio-btn" id="btn-s1" data-label="수호의 인사" onclick="playAudio(&#39;s1&#39;,this)">
+      <span class="btn-icon">🔊</span> 수호의 인사
+    </button>
+    <div class="bubble tail-bl">
+      …드디어, 그대가 왔구나. ✨<br><br>
+      나는 <b>수호</b>.<br>
+      수백 년 전, 나라를 지키기 위해<br>
+      이 <em>활</em>에 영혼을 봉인한 왕손이다.<br><br>
+      그대의 발걸음이… 우리를 다시<br>
+      깨어나게 할지도 모른다.<br><br>
+      부디, 스크롤을 내려 나를 따라와다오.
+    </div>
+  </div>
+  <div class="intro-char">
+    <img src="file:///C:/Users/USER/Downloads/suho/suho.png" alt="수호">
+  </div>
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="sh-arrow"></div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬2: 타이틀 ══ -->
+<section class="scene in-view" id="s2">
+  <div class="ch-label">Prologue</div>
+  <div class="ch-title">잊혀진 영웅들,<br><span>망각의 저주</span></div>
+  <div class="ch-en">The Sealed Souls · Bucheon Bow Museum</div>
+  <div class="ch-rule"></div>
+  <div class="ch-desc">
+    나라의 방패가 되기를 택했던 네 영웅.<br>그들의 영혼은 활에 봉인된 채<br>이곳에 잠들어 있다 —<br>사람들의 기억에서 잊히면<br><em>영원히 소멸하는 저주</em>와 함께.
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬3: 박물관 소개 ══ -->
+<section class="scene in-view" id="s3">
+  <div class="s3-top-char">
+    <img src="file:///C:/Users/USER/Downloads/suho/suho2.png" alt="수호 설명">
+  </div>
+  <button class="audio-btn" id="btn-s3" data-label="박물관 소개" onclick="playAudio(&#39;s3&#39;,this)" style="margin-top:14px;margin-bottom:4px;">
+    <span class="btn-icon">🔊</span> 박물관 소개
+  </button>
+  <div class="info-card">
+    <h3>🏛️ 우리가 잠든 곳</h3>
+    <p>이곳은 <b>부천시 활박물관</b>. 우리의 영혼이 깃든 활들이 조각난 채 유물로 안치된 곳이다.</p>
+    <p>전시실에는 대표적 활인 <b>각궁</b>을 비롯해 <b>명적·유엽전</b> 등 시대별 활과 화살, 근대 무기인 <b>신기전기·총통</b>까지 <b>100여 점</b>이 잠들어 있다.</p>
+  </div>
+  <div class="info-card">
+    <h3>💫 조각난 영혼들</h3>
+    <p>왕조가 끝나며 우리의 이름은 역사 속으로 사라졌고, 영혼이 깃든 활은 산산이 흩어졌다.</p>
+    <p>그대가 전시를 둘러보며 우리를 <b>기억</b>해줄 때마다, 흩어진 <b>'사랑의 구슬'</b>이 조금씩 모여든다.</p>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬4: 전시 구역 안내 ══ -->
+<section class="scene in-view" id="s4">
+  <div class="zone-head">
+    <h2>🗺️ 전시 구역 안내</h2>
+    <p>활박물관은 여섯 개의 구역으로 이루어져 있다.<br>순서대로 둘러보면 더욱 좋으니라.</p>
+  </div>
+  <div class="zone-grid">
+    <div class="zone-card">
+      <div class="zn">ZONE 01</div>
+      <h4>신기전기화차</h4>
+      <p>조선의 다연발 로켓 화기</p>
+    </div>
+    <div class="zone-card">
+      <div class="zn">ZONE 02</div>
+      <h4>시대별 화살</h4>
+      <p>시대와 쓰임에 따른 화살들</p>
+    </div>
+    <div class="zone-card">
+      <div class="zn">ZONE 03</div>
+      <h4>활 · 각궁</h4>
+      <p>우리 전통 복합궁의 정수</p>
+    </div>
+    <div class="zone-card">
+      <div class="zn">ZONE 04</div>
+      <h4>5G 실감 국궁 체험</h4>
+      <p>직접 활을 쏘아보는 체험</p>
+    </div>
+    <div class="zone-card">
+      <div class="zn">ZONE 05</div>
+      <h4>기증자 전시실</h4>
+      <p>궁시장의 도구와 재료</p>
+    </div>
+    <div class="zone-card">
+      <div class="zn">ZONE 06</div>
+      <h4>총통</h4>
+      <p>화약을 쓰던 근대 화기</p>
+    </div>
+  </div>
+  <button class="audio-btn" id="btn-s4" data-label="구역 안내 듣기" onclick="playAudio(&#39;s4&#39;,this)">
+    <span class="btn-icon">🔊</span> 구역 안내 듣기
+  </button>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬5: 도슨트 가이드 소개 ══ -->
+<section class="scene in-view" id="s5">
+  <div class="guide-head">
+    <h2>🎧 그대의 길잡이들</h2>
+    <p>전시를 둘러보는 동안,<br>세 길잡이가 차례로 그대를 도울 것이다.</p>
+  </div>
+  <div class="guide-card shion">
+    <div class="guide-num">1</div>
+    <div class="guide-info">
+      <h4>시온</h4>
+      <div class="role">CHAPTER · 시대별 화살</div>
+      <p>시대에 따라 달라진 화살과 특별한 화살들의 이야기를 들려줄 길잡이.</p>
+    </div>
+  </div>
+  <div class="guide-card tae">
+    <div class="guide-num">2</div>
+    <div class="guide-info">
+      <h4>태용</h4>
+      <div class="role">CHAPTER · 각궁과 대사례</div>
+      <p>우리 전통 활 각궁과, 왕실의 활쏘기 의식 대사례를 안내할 길잡이.</p>
+    </div>
+  </div>
+  <div class="guide-card gun">
+    <div class="guide-num">3</div>
+    <div class="guide-info">
+      <h4>건호</h4>
+      <div class="role">CHAPTER · 근현대 활쏘기</div>
+      <p>활쏘기가 어떻게 오늘날의 스포츠와 문화로 이어졌는지 들려줄 길잡이.</p>
+    </div>
+  </div>
+  <button class="audio-btn" id="btn-s5" data-label="길잡이 소개 듣기" onclick="playAudio(&#39;s5&#39;,this)">
+    <span class="btn-icon">🔊</span> 길잡이 소개 듣기
+  </button>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ══ 씬6: 마무리 ══ -->
+<section class="scene" id="s6">
+  <div class="s6-char">
+    <img src="file:///C:/Users/USER/Downloads/suho/Suho_enter_last.png" alt="수호">
+  </div>
+  <div class="final-content">
+    <div class="s6-bubble">
+      <button class="audio-btn" id="btn-s6" data-label="수호의 안내" onclick="playAudio(&#39;s6&#39;,this)" style="margin-top:0;margin-bottom:8px;">
+        <span class="btn-icon">🔊</span> 수호의 안내
+      </button>
+      <div class="bubble tail-r">
+        형체마저 흐릿해지는 지금,<br>
+        마지막 힘을 다해 그대에게 청한다.<br><br>
+        전시의 끝, <b>활쏘기 체험장</b>에서<br>
+        그대의 화살이 과녁 정중앙에 닿으면 —<br>
+        흩어진 <b>사랑의 구슬</b>이 모여<br>
+        저주가 풀리고, 우리는 다시<br>
+        온전한 모습으로 되살아난다. ✨<br><br>
+        부디… 제발, 끝까지 함께해다오.<br>
+        그대만이 <em>우리의 활</em>을 되살릴 수 있다.
+      </div>
+    </div>
+    <div class="next-info">
+      <h4>🎯 기억이 곧 힘이다</h4>
+      <p>관람 중간중간 내가 다시 나타나 퀴즈를 낼 것이다. 영웅들의 이야기를 잘 기억해두어라 — 그 기억이 저주를 푸는 열쇠가 될 테니.</p>
+    </div>
+    <a class="nav-btn primary" href="https://hyeyoon0524.github.io/bucheon-bow-museum/Shion_chapter2.html">
+      <span>✦</span><span>관람 시작하기</span>
+    </a>
+    <a class="nav-btn outline" href="https://www.bcmuseum.or.kr/ko/pages/exhi_permanent02" target="_blank">
+      <span>🏛️</span><span>활박물관 공식 홈페이지</span>
+    </a>
+  </div>
+</section>
+
+<script src="./Suho_Intro_files/gsap.min.js.다운로드"></script>
+<script src="./Suho_Intro_files/ScrollTrigger.min.js.다운로드"></script>
+<script>
+(()=>{
+  const scenes=[...document.querySelectorAll('.scene')];
+  function setDot(i){document.querySelectorAll('.pdot').forEach((d,j)=>d.classList.toggle('on',i===j));}
+  function reveal(s){if(s)s.classList.add('in-view');}
+  function checkScenes(){
+    const mid=window.innerHeight*.52;let active=0;
+    scenes.forEach((scene,i)=>{
+      const r=scene.getBoundingClientRect();
+      if(r.top<window.innerHeight*.86&&r.bottom>window.innerHeight*.14)reveal(scene);
+      if(r.top<=mid&&r.bottom>=mid)active=i;
+    });
+    setDot(active);
+  }
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting)reveal(e.target);});checkScenes();
+  },{threshold:.12,rootMargin:'0px 0px -3% 0px'});
+  scenes.forEach(s=>observer.observe(s));
+  let ticking=false;
+  window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{checkScenes();ticking=false;});ticking=true;}},{passive:true});
+  window.addEventListener('resize',checkScenes);
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',checkScenes,{once:true});}
+  else{requestAnimationFrame(checkScenes);}
+  setInterval(checkScenes,250);
+})();
+
+/* 금가루 생성 */
+(()=>{
+  const container=document.getElementById('gold-dust');
+  if(!container)return;
+  const COUNT=window.innerWidth<480?28:45;
+  for(let i=0;i<COUNT;i++){
+    const d=document.createElement('div');
+    d.className='dust';
+    const size=Math.random()*4+1.5;
+    d.style.width=size+'px';
+    d.style.height=size+'px';
+    d.style.left=Math.random()*100+'vw';
+    d.style.setProperty('--drift',(Math.random()*120-60)+'px');
+    const dur=Math.random()*8+7;
+    d.style.animationDuration=dur+'s';
+    d.style.animationDelay=(Math.random()*dur)+'s';
+    container.appendChild(d);
+  }
+})();
+
+/* 오디오 (파일은 나중에 audio 폴더에 추가) */
+const audioFiles={
+  s1:'audio/in1_intro.mp3',
+  s3:'audio/in3_about.mp3',
+  s4:'audio/in4_zones.mp3',
+  s5:'audio/in5_guides.mp3',
+  s6:'audio/in6_start.mp3',
+};
+let currentAudio=null;
+let currentBtn=null;
+function playAudio(key, btn){
+  const label = btn.getAttribute('data-label') || '음성 듣기';
+  if(currentAudio && !currentAudio.paused){
+    currentAudio.pause();currentAudio.currentTime=0;
+    if(currentBtn){currentBtn.classList.remove('playing');currentBtn.innerHTML='<span class="btn-icon">🔊</span> '+currentBtn.getAttribute('data-label');}
+    if(currentBtn===btn){currentAudio=null;currentBtn=null;return;}
+  }
+  const audio=new Audio(audioFiles[key]);
+  currentAudio=audio;currentBtn=btn;
+  btn.classList.add('playing');
+  btn.innerHTML='<span class="btn-icon">⏸</span> 재생 중...';
+  audio.play().catch(()=>{
+    btn.classList.remove('playing');
+    btn.innerHTML='<span class="btn-icon">🔊</span> '+label;
+    currentAudio=null;currentBtn=null;
+  });
+  audio.addEventListener('ended',()=>{
+    btn.classList.remove('playing');
+    btn.innerHTML='<span class="btn-icon">🔊</span> '+label;
+    currentAudio=null;currentBtn=null;
+  });
+}
+</script>
+</body></html>
